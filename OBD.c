@@ -1,13 +1,12 @@
-#include <windows.h>
-#include <tchar.h>
-#include <assert.h>
-#include <stdio.h>
+#include "OBD.h"
 
 char** scanSerial(void)
 {
 	int i;
 	int current = 0;
 	char** ports = (char**)malloc(10*sizeof(char*));
+	if (ports == NULL)
+		return NULL;
 #ifdef _WIN32 
 	HANDLE hCom;
 	OVERLAPPED o;
@@ -15,7 +14,7 @@ char** scanSerial(void)
 	DWORD dwEvtMask;
 	char text[11] = "\\\\.\\COM";
 	//going through all the possible ports (com 1-256)
-	for (i = 1; i < 256; i++)
+	for (i = 1; i < 10; i++)
 	{
 		if (i < 10) { text[7] = i + 48; }
 
@@ -40,13 +39,19 @@ char** scanSerial(void)
 		);
 		if (hCom == INVALID_HANDLE_VALUE)
 		{
-			// Handle the error. 
-			//printf("CreateFile failed with error %d.\n", GetLastError());
+			printf("%s is active\n", text);
+			ports[current] = (char**)malloc(sizeof(text) + 1);
+			if (ports[current] == NULL)
+				return NULL;
+			ports[current] = _strdup(text);
+			current++;
 		}
 		else
 		{
 			printf("%s is active\n", text);
-			ports[current] = malloc(sizeof(text)+1);
+			ports[current] = (char**)malloc(sizeof(text)+1);
+			if (ports[current] == NULL)
+				return NULL;
 			ports[current] = _strdup(text);
 			current++;
 		}

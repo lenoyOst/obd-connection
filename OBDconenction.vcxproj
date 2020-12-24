@@ -126,6 +126,9 @@
     <ClCompile Include="Main.c" />
     <ClCompile Include="OBD.c" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="OBD.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
