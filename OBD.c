@@ -5,6 +5,7 @@
 
 char** scanSerial(void)
 {
+	int i;
 	int current = 0;
 	char** ports = (char**)malloc(10*sizeof(char*));
 #ifdef _WIN32 
@@ -14,7 +15,7 @@ char** scanSerial(void)
 	DWORD dwEvtMask;
 	char text[11] = "\\\\.\\COM";
 	//going through all the possible ports (com 1-256)
-	for (int i = 0; i < 256; i++)
+	for (i = 0; i < 256; i++)
 	{
 		if (i < 10) { text[7] = i + 49; }
 
