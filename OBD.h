@@ -4,4 +4,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-char** scanSerial(void);
+typedef struct connections
+{
+	char** list;
+	int size;
+} Connections;
+
+Connections* scanSerial(void);

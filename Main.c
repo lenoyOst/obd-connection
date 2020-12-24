@@ -2,7 +2,15 @@
 
 int main(void)
 {
-	char** ports = scanSerial();
-	printf("%s", ports[0]);
-	free(ports);
+	int i;
+	Connections* connections = scanSerial();
+	if (connections == NULL)
+		return 0;
+
+	for (i = 0; i < connections->size; i++)
+	{
+		puts(connections->list[i]);
+	}
+	free(connections->list);
+	return 0;
 }

@@ -1,8 +1,9 @@
 #include "OBD.h"
 
-char** scanSerial(void)
+Connections* scanSerial(void)
 {
-	int i;
+	Connections* connections;
+	int i, j;
 	int current = 0;
 	char** ports = (char**)malloc(10*sizeof(char*));
 	if (ports == NULL)
@@ -39,23 +40,25 @@ char** scanSerial(void)
 		);
 		if (hCom == INVALID_HANDLE_VALUE)
 		{
-			printf("%s is active\n", text);
-			ports[current] = (char**)malloc(sizeof(text) + 1);
-			if (ports[current] == NULL)
-				return NULL;
-			ports[current] = _strdup(text);
-			current++;
+			
 		}
 		else
 		{
 			printf("%s is active\n", text);
 			ports[current] = (char**)malloc(sizeof(text)+1);
 			if (ports[current] == NULL)
+			{
+				for (j = 0; j < current; j++)
+				{
+					free(ports[j]);
+				}
+				free(ports);
 				return NULL;
+			}
 			ports[current] = _strdup(text);
 			current++;
 		}
-		if (current == 9)
+		if (current == 10)
 		{
 			break;
 			//toDo : warning , error
@@ -65,6 +68,11 @@ char** scanSerial(void)
 	//toDo
 
 #endif
-	return ports;
+	connections = (Connections*)malloc(sizeof(Connections));
+	if (connections == NULL)
+		return NULL;
+	connections->list = ports;
+	connections->size = current;
+	return connections;
 }
 
