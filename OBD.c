@@ -15,9 +15,9 @@ char** scanSerial(void)
 	DWORD dwEvtMask;
 	char text[11] = "\\\\.\\COM";
 	//going through all the possible ports (com 1-256)
-	for (i = 0; i < 256; i++)
+	for (i = 1; i < 256; i++)
 	{
-		if (i < 10) { text[7] = i + 49; }
+		if (i < 10) { text[7] = i + 48; }
 
 		else if (i < 100) {
 			text[7] = (i / 10) + 48;
