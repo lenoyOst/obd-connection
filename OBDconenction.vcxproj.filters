@@ -21,9 +21,15 @@
     <ClCompile Include="Main.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Communication.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="OBD.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Communication.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

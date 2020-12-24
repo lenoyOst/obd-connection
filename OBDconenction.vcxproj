@@ -123,10 +123,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Communication.c" />
     <ClCompile Include="Main.c" />
     <ClCompile Include="OBD.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Communication.h" />
     <ClInclude Include="OBD.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

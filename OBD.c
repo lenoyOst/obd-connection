@@ -5,15 +5,20 @@ Connections* scanSerial(void)
 	Connections* connections;
 	int i, j;
 	int current = 0;
-	char** ports = (char**)malloc(10*sizeof(char*));
-	if (ports == NULL)
-		return NULL;
+	char** ports;
+	
+
 #ifdef _WIN32 
 	HANDLE hCom;
 	OVERLAPPED o;
 	BOOL fSuccess;
 	DWORD dwEvtMask;
 	char text[11] = "\\\\.\\COM";
+
+	ports = (char**)malloc(10 * sizeof(char*));
+	if (ports == NULL)
+		return NULL;
+
 	//going through all the possible ports (com 1-256)
 	for (i = 1; i < 10; i++)
 	{
@@ -25,11 +30,11 @@ Connections* scanSerial(void)
 		}
 		else
 		{
-
 			text[7] = (i / 100) + 48;
 			text[8] = (i / 10) % 10 + 48;
 			text[9] = (i % 10) + 48;
 		}
+
 		hCom = CreateFile(TEXT(text),
 			GENERIC_READ | GENERIC_WRITE,
 			0,    // exclusive access 
@@ -38,13 +43,15 @@ Connections* scanSerial(void)
 			FILE_FLAG_OVERLAPPED,
 			NULL
 		);
+
+	
+
 		if (hCom == INVALID_HANDLE_VALUE)
 		{
-			
+			//
 		}
 		else
 		{
-			printf("%s is active\n", text);
 			ports[current] = (char**)malloc(sizeof(text)+1);
 			if (ports[current] == NULL)
 			{
@@ -71,8 +78,10 @@ Connections* scanSerial(void)
 	connections = (Connections*)malloc(sizeof(Connections));
 	if (connections == NULL)
 		return NULL;
+
 	connections->list = ports;
 	connections->size = current;
+
 	return connections;
 }
 
