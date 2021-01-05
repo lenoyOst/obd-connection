@@ -12,6 +12,7 @@
 #include <string.h>
 #include <termios.h>
 #include <unistd.h>
+#include "log.h"
 
 
 #define MAX_POTENTIALS_PORTS 10

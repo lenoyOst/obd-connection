@@ -1,5 +1,6 @@
 #include "OBD.h"
 
+
 int scanSerial(Connections* connections)
 {	
 	int error = SUCCESS;
@@ -125,15 +126,14 @@ int connect(char* portname, int* pd)
 	set_blocking (*pd, 1);
 	
 	error = send(*pd, "ATZ");
+	
 	if(error>=ERROR)	{disconnect(*pd); return NOT_OBD;}
 	
-	sleep(2);
-	
+	sleep(1);
 	error = recv(*pd, buf, MAX_MESSEGE_SIZE);
 	if(error >= ERROR)	{disconnect(*pd); return NOT_OBD;}
 	
-	puts(buf);
-	if(strcmp(buf, "ATZ\n\n\nELM327 v1.5\n\n>") == 0)	{return SUCCESS;}
+	if(strcmp(buf, "ATZ\n\n\nELM327 v1.5\n\n>") == 0 || strcmp(buf, "\n\nELM327 v1.5\n\n>") == 0) 	{return SUCCESS;}
 	
 	disconnect(*pd);
 	return NOT_OBD;
@@ -168,7 +168,7 @@ int send(int pd, char* msg)
 // --------------------------------------------------------------------
 int recv(int pd, char* msg, int len)
 {
-	sleep(1);
+	usleep(10000);
 	int n;
 	if((n = read (pd, msg, len))<0)	{return READ_ERROR;}
 	msg[n] = '\0';
@@ -230,3 +230,4 @@ void set_blocking (int fd, int should_block)
         if (tcsetattr (fd, TCSANOW, &tty) != 0)
 		printf("error3");
 }
+
