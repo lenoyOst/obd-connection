@@ -3,6 +3,7 @@
 
 int scanSerial(Connections* connections)
 {	
+	writeToLog("-scanning for serial ports");
 	int error = SUCCESS;
 		
 
@@ -19,7 +20,7 @@ int scanSerial(Connections* connections)
 	DWORD dwEvtMask;
 	char text[11] = "\\\\.\\COM";
 
-	ports = (char**)malloc(MAX_POTENTIALS_PORTS * sizeof(char*));
+	ports = (char*)malloc(MAX_POTENTIALS_PORTS * sizeof(char));
 	if (ports == NULL)
 	{
 		free(connections);
@@ -113,6 +114,7 @@ int connect(char* portname, int* pd)
 {
 	char command[100] = "sudo chmod 777 ";
 	char buf[MAX_MESSEGE_SIZE];
+	char arr[MAX_MESSEGE_SIZE];
 	int i, error;
 	for(i=0;i<strlen(portname);i++)
 	{
@@ -120,22 +122,52 @@ int connect(char* portname, int* pd)
 	}
 	system(command);
 	*pd = open (portname, O_RDWR | O_NOCTTY | O_NDELAY);
-	if (*pd < 0)	{return NOT_OBD;}
+	if (*pd < 0)
+	{
+		strcpy(arr, "-");
+		strcat(arr, portname);
+		strcat(arr, " is not obd");
+		writeToLog(arr);
+		return NOT_OBD;
+	}
 
 	set_interface_attribs (*pd, B38400, 0);
 	set_blocking (*pd, 1);
 	
 	error = send(*pd, "ATZ");
 	
-	if(error>=ERROR)	{disconnect(*pd); return NOT_OBD;}
+	if(error>=ERROR)
+	{
+		disconnect(*pd);
+		strcpy(arr, "-cannot send messege to ");
+		strcat(arr, portname);
+		writeToLog(arr);
+		return NOT_OBD;
+	}
 	
 	sleep(1);
 	error = recv(*pd, buf, MAX_MESSEGE_SIZE);
-	if(error >= ERROR)	{disconnect(*pd); return NOT_OBD;}
+	if(error >= ERROR)
+	{
+		disconnect(*pd);
+		strcpy(arr, "-cannot read data from ");
+		strcat(arr, portname);
+		writeToLog(arr);
+		return NOT_OBD;
+	}
 	
-	if(strcmp(buf, "ATZ\n\n\nELM327 v1.5\n\n>") == 0 || strcmp(buf, "\n\nELM327 v1.5\n\n>") == 0) 	{return SUCCESS;}
+	if(strcmp(buf, "ATZ\n\n\nELM327 v1.5\n\n>") == 0 || strcmp(buf, "\n\nELM327 v1.5\n\n>") == 0) 
+	{
+		strcpy(arr, "-obd found: ");
+		strcat(arr, portname);
+		writeToLog(arr);
+		return SUCCESS;
+	}
 	
 	disconnect(*pd);
+	strcpy(arr, "-unexpected answer from "); 
+	strcat(arr, portname);
+	writeToLog(arr);
 	return NOT_OBD;
 }
 // --------------------------
@@ -143,7 +175,12 @@ int connect(char* portname, int* pd)
 // --------------------------
 int disconnect(int pd)
 {
-	if(close(pd)<0)	{return CLOSE_ERROR;}
+	if(close(pd)<0)
+	{
+		writeToLog("-closing port error");
+		return CLOSE_ERROR;
+	}
+	writeToLog("-port closed");
 	return SUCCESS;
 }
 
@@ -155,12 +192,20 @@ int send(int pd, char* msg)
 {
 	int len = strlen(msg), i;
 	char text[len+3];
+	char arr[MAX_MESSEGE_SIZE];
 	for(i=0;i<len;i++)
 	{
 		text[i] = msg[i];
 	}
 	text[i] = '\r';	
-	if(write (pd, text, strlen(text)) < 0)	{return WRITE_ERROR;}
+	if(write (pd, text, strlen(text)) < 0)
+	{
+		writeToLog("-write to port error");
+		return WRITE_ERROR;
+	}
+	strcpy(arr, "-write: ");
+	strcat(arr, msg);
+	writeToLog(arr);
 	return SUCCESS;
 }
 // --------------------------------------------------------------------
@@ -168,10 +213,14 @@ int send(int pd, char* msg)
 // --------------------------------------------------------------------
 int recv(int pd, char* msg, int len)
 {
-	usleep(10000);
 	int n;
+	char arr[MAX_MESSEGE_SIZE];
+	usleep(10000);
 	if((n = read (pd, msg, len))<0)	{return READ_ERROR;}
 	msg[n] = '\0';
+	strcpy(arr, "-read: ");
+	strcat(arr, msg);
+	writeToLog(arr);
 	return SUCCESS;
 }
 
@@ -230,4 +279,3 @@ void set_blocking (int fd, int should_block)
         if (tcsetattr (fd, TCSANOW, &tty) != 0)
 		printf("error3");
 }
-

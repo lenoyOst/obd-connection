@@ -1,0 +1,33 @@
+-scanning for serial ports
+-/dev/ttyS0 is not obd
+-/dev/ttyS1 is not obd
+-/dev/ttyS2 is not obd
+-write: ATZ
+-read: 
+
+ELM327 v1.5
+
+>
+-obd found: /dev/ttyS3
+-write: ATE0
+-read: ATE0
+OK
+
+>
+-write: ATH1
+-read: OK
+
+>
+-write: ATE0
+-read: OK
+
+>
+-write: ATH0
+-read: OK
+
+>
+-write: ATRV
+-read: 0.1V
+
+>
+-port closed

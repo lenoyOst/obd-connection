@@ -3,3 +3,5 @@
 #include<stdlib.h>
 
 void creatLog();
+void writeToLog(char* msg);
+void closeLog();

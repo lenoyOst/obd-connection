@@ -6,7 +6,6 @@ int main(void)
 	int error, pd, i;
 	Connections connections;
 	char buf[MAX_MESSEGE_SIZE * sizeof(char)];
-	
 	creatLog();
 	// --------------------------------------------------------------
 	// scan serial ports - checks if there are connected serial ports
@@ -28,7 +27,6 @@ int main(void)
 	for(i=0;i<connections.size;i++)
 	{
 		error = connect(connections.list[i], &pd);
-		//printError(error);
 		if(error == SUCCESS)
 			break;
 	}
@@ -47,16 +45,16 @@ int main(void)
 	//printError(error);
 	if(error >= ERROR)	{disconnect(pd); freeConnections(&connections); return 0;}
 
-	sleep(1);
 
 	error = recv(pd, buf, MAX_MESSEGE_SIZE);
 	//SprintError(error);
 	if(error >= ERROR)	{disconnect(pd); freeConnections(&connections); return 0;}
+	puts(buf);
 
 	error = send(pd, "ATH1");
 	//printError(error);
 	if(error >= ERROR)	{disconnect(pd); freeConnections(&connections); return 0;}
-	sleep(3);
+	
 	error = recv(pd, buf, MAX_MESSEGE_SIZE);
 	//SprintError(error);
 	if(error >= ERROR)	{disconnect(pd); freeConnections(&connections); return 0;}
@@ -89,6 +87,7 @@ int main(void)
 
 	freeConnections(&connections);
 	disconnect(pd);
+	closeLog();
 	puts("done");
 	return 0;
 }
