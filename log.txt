@@ -9,4 +9,4 @@
 -/dev/ttyS7 is not obd
 -/dev/ttyS8 is not obd
 -/dev/ttyS9 is not obd
-obd is not connected
+-obd is not connected

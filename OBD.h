@@ -75,4 +75,4 @@ int recv(int pd, char* msg, int len);
 int disconnect(int pd);
 int OBD();
 Commands getCommands();
-char* command(int pd, char* command);
+int command(int pd, char* command, char* answer);

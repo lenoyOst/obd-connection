@@ -4,7 +4,7 @@
 int main(void)
 {
 	int pd;
-	char* buf;
+	char buf[MAX_MESSEGE_SIZE*sizeof(char)] = "";
 	creatLog();
 	
 	pd = OBD();
@@ -14,13 +14,14 @@ int main(void)
 	// --------------------------------------------------------------
 	
 	Commands commands = getCommands();
-	buf = command(pd, commands.echo_off);
-	puts(buf);
-	command(pd, commands.header_off);
-
+	if(command(pd, commands.echo_off, buf)==SUCCESS)
+		puts(buf);
+	if(command(pd, commands.header_off, buf)==SUCCESS)
+		puts(buf);
 
 	disconnect(pd);
 	closeLog();
 	puts("done");
+
 	return 0;
 }

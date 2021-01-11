@@ -113,7 +113,7 @@ void freeConnections(Connections* connection)
 int connect(char* portname, int* pd)
 {
 	char sys[100] = "sudo chmod 777 ";
-	char* buf;
+	char buf[MAX_MESSEGE_SIZE];
 	char arr[MAX_MESSEGE_SIZE];
 	int i;
 	for(i=0;i<strlen(portname);i++)
@@ -134,7 +134,7 @@ int connect(char* portname, int* pd)
 	set_interface_attribs (*pd, B38400, 0);
 	set_blocking (*pd, 1);
 	
-	buf = command(*pd, getCommands().reset);
+	command(*pd, getCommands().reset, buf);
 	if(buf == NULL)
 	{
 		disconnect(*pd);
@@ -280,7 +280,7 @@ int OBD()
 	if (error >= ERROR )	{return 0;}
 	else if(connections.size==0)
 	{
-		writeToLog("obd is not connected");
+		writeToLog("-obd is not connected");
 		freeConnections(&connections);
 		return -1;
 	}
@@ -296,7 +296,7 @@ int OBD()
 	}
 	if(error!=SUCCESS)
 	{
-		writeToLog("obd is not connected");
+		writeToLog("-obd is not connected");
 		freeConnections(&connections);
 		return -1;
 	}
@@ -317,13 +317,13 @@ Commands getCommands()
 	return commands;
 }
 
-char* command(int pd, char* command)
+int command(int pd, char* command, char* answer)
 {
 	int error = SUCCESS;
 	char buf[MAX_MESSEGE_SIZE * sizeof(char)];
 
 	error = send(pd, command);
-	if(error >= ERROR)	{return NULL;}
+	if(error >= ERROR)	{return error;}
 
 	if(strcmp(command, getCommands().reset)==0)
 		sleep(1);
@@ -331,7 +331,8 @@ char* command(int pd, char* command)
 	usleep(10000);
 
 	error = recv(pd, buf, MAX_MESSEGE_SIZE);
-	if(error >= ERROR)	{return NULL;}
+	if(error >= ERROR)	{return error;}
 
-	return strdup(buf);
+	strcpy(answer, buf);
+	return SUCCESS;
 }
