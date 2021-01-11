@@ -63,3 +63,4 @@ void set_blocking (int fd, int should_block);
 int send(int pd, char* msg);
 int recv(int pd, char* msg, int len);
 int disconnect(int pd);
+int OBD();

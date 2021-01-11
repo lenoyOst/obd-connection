@@ -264,6 +264,7 @@ int set_interface_attribs (int fd, int speed, int parity)
 }
 
 void set_blocking (int fd, int should_block)
+
 {
         struct termios tty;
         memset (&tty, 0, sizeof(tty));
@@ -278,4 +279,39 @@ void set_blocking (int fd, int should_block)
 
         if (tcsetattr (fd, TCSANOW, &tty) != 0)
 		printf("error3");
+}
+
+int OBD()
+{
+	Connections connections;
+	int error , i ,pd;
+	// --------------------------------------------------------------
+	// scan serial ports - checks if there are connected serial ports
+	// --------------------------------------------------------------
+	error = scanSerial(&connections);
+	if (error >= ERROR )	{return 0;}
+	else if(connections.size==0)
+	{
+		writeToLog("obd is not connected");
+		freeConnections(&connections);
+		return -1;
+	}
+	// ------------------------------------------------------------------------------------------------------------------------------------
+	// connect to OBD - checks all the serial portsthat we found and finds the one that has ELM327 v1.5 connected , if we cound not fine one we exit
+	// -------------------------------------------------------------------------------------------------------------------------------------
+	
+	for(i=0;i<connections.size;i++)
+	{
+		error = connect(connections.list[i], &pd);
+		if(error == SUCCESS)
+			break;
+	}
+	if(error!=SUCCESS)
+	{
+		writeToLog("obd is not connected");
+		freeConnections(&connections);
+		return -1;
+	}
+	freeConnections(&connections);
+	return pd;
 }

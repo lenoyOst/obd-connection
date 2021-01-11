@@ -2,13 +2,15 @@
 -/dev/ttyS0 is not obd
 -/dev/ttyS1 is not obd
 -/dev/ttyS2 is not obd
+-/dev/ttyS3 is not obd
 -write: ATZ
--read: 
+-read: ATZ
+
 
 ELM327 v1.5
 
 >
--obd found: /dev/ttyS3
+-obd found: /dev/ttyS4
 -write: ATE0
 -read: ATE0
 OK
