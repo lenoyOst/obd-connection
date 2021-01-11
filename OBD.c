@@ -314,6 +314,13 @@ Commands getCommands()
 	commands.header_on="ATH1";
 	commands.reset="ATZ";
 
+	commands.rpm = "010C";
+	commands.speed = "010D";
+	commands.throtle = "0111";
+	commands.fuel = "012F";
+	commands.engine_load = "0104";
+
+
 	return commands;
 }
 

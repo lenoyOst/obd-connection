@@ -62,6 +62,12 @@ typedef struct commands
 	char* header_on;
 	char* header_off;
 
+	char* rpm;
+	char* speed;
+	char* throtle;
+	char* fuel;
+	char* engine_load;
+
 } Commands;
 
 int scanSerial(Connections* connections);
