@@ -54,6 +54,16 @@ typedef struct connections
 	int size;
 } Connections;
 
+typedef struct commands
+{
+	char* reset;
+	char* echo_on;
+	char* echo_off;
+	char* header_on;
+	char* header_off;
+
+} Commands;
+
 int scanSerial(Connections* connections);
 void freeConnections(Connections* connection);
 int connect(char* portname, int *pd);
@@ -64,3 +74,5 @@ int send(int pd, char* msg);
 int recv(int pd, char* msg, int len);
 int disconnect(int pd);
 int OBD();
+Commands getCommands();
+char* command(int pd, char* command);

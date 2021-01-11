@@ -3,35 +3,10 @@
 -/dev/ttyS1 is not obd
 -/dev/ttyS2 is not obd
 -/dev/ttyS3 is not obd
--write: ATZ
--read: ATZ
-
-
-ELM327 v1.5
-
->
--obd found: /dev/ttyS4
--write: ATE0
--read: ATE0
-OK
-
->
--write: ATH1
--read: OK
-
->
--write: ATE0
--read: OK
-
->
--write: ATH0
--read: OK
-
->
--write: ATRV
--read: 0.1V
-
->
--port closed
-
-hghghghgh
+-/dev/ttyS4 is not obd
+-/dev/ttyS5 is not obd
+-/dev/ttyS6 is not obd
+-/dev/ttyS7 is not obd
+-/dev/ttyS8 is not obd
+-/dev/ttyS9 is not obd
+obd is not connected

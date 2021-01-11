@@ -112,15 +112,15 @@ void freeConnections(Connections* connection)
 
 int connect(char* portname, int* pd)
 {
-	char command[100] = "sudo chmod 777 ";
-	char buf[MAX_MESSEGE_SIZE];
+	char sys[100] = "sudo chmod 777 ";
+	char* buf;
 	char arr[MAX_MESSEGE_SIZE];
-	int i, error;
+	int i;
 	for(i=0;i<strlen(portname);i++)
 	{
-		command[i+15] = portname[i];
+		sys[i+15] = portname[i];
 	}
-	system(command);
+	system(sys);
 	*pd = open (portname, O_RDWR | O_NOCTTY | O_NDELAY);
 	if (*pd < 0)
 	{
@@ -134,24 +134,13 @@ int connect(char* portname, int* pd)
 	set_interface_attribs (*pd, B38400, 0);
 	set_blocking (*pd, 1);
 	
-	error = send(*pd, "ATZ");
-	
-	if(error>=ERROR)
+	buf = command(*pd, getCommands().reset);
+	if(buf == NULL)
 	{
 		disconnect(*pd);
-		strcpy(arr, "-cannot send messege to ");
+		strcpy(arr, "-");
 		strcat(arr, portname);
-		writeToLog(arr);
-		return NOT_OBD;
-	}
-	
-	sleep(1);
-	error = recv(*pd, buf, MAX_MESSEGE_SIZE);
-	if(error >= ERROR)
-	{
-		disconnect(*pd);
-		strcpy(arr, "-cannot read data from ");
-		strcat(arr, portname);
+		strcat(arr, " is not obd");
 		writeToLog(arr);
 		return NOT_OBD;
 	}
@@ -215,7 +204,6 @@ int recv(int pd, char* msg, int len)
 {
 	int n;
 	char arr[MAX_MESSEGE_SIZE];
-	usleep(10000);
 	if((n = read (pd, msg, len))<0)	{return READ_ERROR;}
 	msg[n] = '\0';
 	strcpy(arr, "-read: ");
@@ -314,4 +302,36 @@ int OBD()
 	}
 	freeConnections(&connections);
 	return pd;
+}
+
+Commands getCommands()
+{
+	Commands commands;
+
+	commands.echo_off="ATE0";
+	commands.echo_on="ATE1";
+	commands.header_off="ATH0";
+	commands.header_on="ATH1";
+	commands.reset="ATZ";
+
+	return commands;
+}
+
+char* command(int pd, char* command)
+{
+	int error = SUCCESS;
+	char buf[MAX_MESSEGE_SIZE * sizeof(char)];
+
+	error = send(pd, command);
+	if(error >= ERROR)	{return NULL;}
+
+	if(strcmp(command, getCommands().reset)==0)
+		sleep(1);
+
+	usleep(10000);
+
+	error = recv(pd, buf, MAX_MESSEGE_SIZE);
+	if(error >= ERROR)	{return NULL;}
+
+	return strdup(buf);
 }

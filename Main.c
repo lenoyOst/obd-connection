@@ -3,8 +3,8 @@
 
 int main(void)
 {
-	int error, pd;
-	char buf[MAX_MESSEGE_SIZE * sizeof(char)];
+	int pd;
+	char* buf;
 	creatLog();
 	
 	pd = OBD();
@@ -13,42 +13,11 @@ int main(void)
 	// OBD communication
 	// --------------------------------------------------------------
 	
-	error = send(pd, "ATE0");
-	if(error >= ERROR)	{disconnect(pd);return 0;}
+	Commands commands = getCommands();
+	buf = command(pd, commands.echo_off);
+	puts(buf);
+	command(pd, commands.header_off);
 
-	error = recv(pd, buf, MAX_MESSEGE_SIZE);
-	//SprintError(error);
-	if(error >= ERROR)	{disconnect(pd); return 0;}
-
-	error = send(pd, "ATH1");
-	//printError(error);
-	if(error >= ERROR)	{disconnect(pd); return 0;}
-	
-	error = recv(pd, buf, MAX_MESSEGE_SIZE);
-	//SprintError(error);
-	if(error >= ERROR)	{disconnect(pd);  return 0;}
-
-
-	error = send(pd, "ATE0");
-	//printError(error);
-	if(error >= ERROR)	{disconnect(pd);  return 0;}
-	error = recv(pd, buf, MAX_MESSEGE_SIZE);
-	//SprintError(error);
-	if(error >= ERROR)	{disconnect(pd);  return 0;}
-
-	error = send(pd, "ATH0");
-	//printError(error);
-	if(error >= ERROR)	{disconnect(pd); return 0;}
-	error = recv(pd, buf, MAX_MESSEGE_SIZE);
-	//SprintError(error);
-	if(error >= ERROR)	{disconnect(pd); return 0;}
-
-		error = send(pd, "ATRV");
-	//printError(error);
-	if(error >= ERROR)	{disconnect(pd); return 0;}
-	error = recv(pd, buf, MAX_MESSEGE_SIZE);
-	//SprintError(error);
-	if(error >= ERROR)	{disconnect(pd); return 0;}
 
 	disconnect(pd);
 	closeLog();
