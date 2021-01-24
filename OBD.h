@@ -47,6 +47,7 @@
 #define WRITE_ERROR 7
 #define READ_ERROR 8
 #define CLOSE_ERROR 9
+#define CAR_NOT_CONNECTED_ERROR 10
 
 typedef struct connections
 {
@@ -56,12 +57,20 @@ typedef struct connections
 
 typedef struct commands
 {
+	//at commands
 	char* reset;
 	char* echo_on;
 	char* echo_off;
 	char* header_on;
 	char* header_off;
-
+	char* describe_protocol;
+	char* timing_off;
+	char* timing_auto1;
+	char* timing_auto2;
+	char* linefeeds_off;
+	char* linefeeds_on;
+	char* set_protocol_auto;
+	//mode1 commands
 	char* rpm;
 	char* speed;
 	char* throtle;

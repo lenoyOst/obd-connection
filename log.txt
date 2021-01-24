@@ -2,11 +2,86 @@
 -/dev/ttyS0 is not obd
 -/dev/ttyS1 is not obd
 -/dev/ttyS2 is not obd
--/dev/ttyS3 is not obd
--/dev/ttyS4 is not obd
--/dev/ttyS5 is not obd
--/dev/ttyS6 is not obd
--/dev/ttyS7 is not obd
--/dev/ttyS8 is not obd
--/dev/ttyS9 is not obd
--obd is not connected
+-write: ATZ
+-read: \n\nELM327 v1.5\n\n>
+-obd found: /dev/ttyS3
+-write: ATE0
+-read: ATE0\nOK\n\n>
+-write: 010C
+-read: 41 0C 0E 0F \n\n>
+-write: 010D
+-read: 41 0D 00 \n\n>
+-write: 0111
+-read: 41 11 E5 \n\n>
+-write: 0104
+-read: 41 04 20 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010C
+-read: 41 0C 0E 14 \n\n>
+-write: 010D
+-read: 41 0D 00 \n\n>
+-write: 0111
+-read: 41 11 E5 \n\n>
+-write: 0104
+-read: 41 04 1E \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010C
+-read: 41 0C 0E 0F \n\n>
+-write: 010D
+-read: 41 0D 00 \n\n>
+-write: 0111
+-read: 41 11 E5 \n\n>
+-write: 0104
+-read: 41 04 1E \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010C
+-read: 41 0C 0E 0B \n\n>
+-write: 010D
+-read: 41 0D 00 \n\n>
+-write: 0111
+-read: 41 11 E5 \n\n>
+-write: 0104
+-read: 41 04 1E \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010C
+-read: 41 0C 0E 0A \n\n>
+-write: 010D
+-read: 41 0D 00 \n\n>
+-write: 0111
+-read: 41 11 E5 \n\n>
+-write: 0104
+-read: 41 04 1F \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010C
+-read: 41 0C 0E 0E \n\n>
+-write: 010D
+-read: 41 0D 00 \n\n>
+-write: 0111
+-read: 41 11 E5 \n\n>
+-write: 0104
+-read: 41 04 1F \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010C
+-read: 41 0C 0E 05 \n\n>
+-write: 010D
+-read: 41 0D 00 \n\n>
+-write: 0111
+-read: 41 11 E5 \n\n>
+-write: 0104
+-read: 41 04 1F \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010C
+-read: 41 0C 0E 13 \n\n>
+-write: 010D
+-read: 41 0D 00 \n\n>
+-write: 0111
+-read: 41 11 E5 \n\n>
+-write: 0104
+-port closed

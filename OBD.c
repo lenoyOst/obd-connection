@@ -144,7 +144,6 @@ int connect(char* portname, int* pd)
 		writeToLog(arr);
 		return NOT_OBD;
 	}
-	
 	if(strcmp(buf, "ATZ\n\n\nELM327 v1.5\n\n>") == 0 || strcmp(buf, "\n\nELM327 v1.5\n\n>") == 0) 
 	{
 		strcpy(arr, "-obd found: ");
@@ -204,11 +203,22 @@ int recv(int pd, char* msg, int len)
 {
 	int n;
 	char arr[MAX_MESSEGE_SIZE];
-	if((n = read (pd, msg, len))<0)	{return READ_ERROR;}
+	n = read (pd, msg, len);
+	if(n<0)	{writeToLog("-exited read with -1");return READ_ERROR;}
+	if(strcmp(msg , "CAN ERROR\n\n>") == 0)
+	{
+		return CAR_NOT_CONNECTED_ERROR;
+	}
+	else if(strncmp(msg , "SE" ,2) == 0) 
+	{
+		sleep(2);
+		n += read (pd, msg + n, len);
+	}
 	msg[n] = '\0';
 	strcpy(arr, "-read: ");
 	strcat(arr, msg);
 	writeToLog(arr);
+	if(strcmp(msg , "SEARCHING...\nUNABLE TO CONNECT\n\n>") == 0){return CAR_NOT_CONNECTED_ERROR;}
 	return SUCCESS;
 }
 
@@ -303,7 +313,9 @@ int OBD()
 	freeConnections(&connections);
 	return pd;
 }
-
+//-------------------------------------
+//return a struct that contains the commands 
+//--------------------------------
 Commands getCommands()
 {
 	Commands commands;
@@ -313,6 +325,13 @@ Commands getCommands()
 	commands.header_off="ATH0";
 	commands.header_on="ATH1";
 	commands.reset="ATZ";
+	commands.describe_protocol="ATDP";
+	commands.timing_off="ATAT0";
+	commands.timing_auto1="ATAT1";
+	commands.timing_auto2="ATAT2";
+	commands.linefeeds_off="ATL0";
+	commands.linefeeds_on="ATL1";
+	commands.set_protocol_auto="ATSP0";
 
 	commands.rpm = "010C";
 	commands.speed = "010D";
@@ -323,7 +342,9 @@ Commands getCommands()
 
 	return commands;
 }
-
+//------------------------------------------------------------------------------------
+// send to the elm the command , reads from the elm the answer and sets the answer var
+//------------------------------------------------------------------------------------
 int command(int pd, char* command, char* answer)
 {
 	int error = SUCCESS;
@@ -335,11 +356,10 @@ int command(int pd, char* command, char* answer)
 	if(strcmp(command, getCommands().reset)==0)
 		sleep(1);
 
-	usleep(10000);
+	usleep(230000);
 
 	error = recv(pd, buf, MAX_MESSEGE_SIZE);
 	if(error >= ERROR)	{return error;}
-
 	strcpy(answer, buf);
 	return SUCCESS;
 }
