@@ -134,7 +134,7 @@ int connect(char* portname, int* pd)
 	set_interface_attribs (*pd, B38400, 0);
 	set_blocking (*pd, 1);
 	
-	command(*pd, getCommands().reset, buf);
+	command(*pd, getCommands().reset,NULL, buf);
 	if(buf == NULL)
 	{
 		disconnect(*pd);
@@ -338,6 +338,7 @@ Commands getCommands()
 	commands.throtle = "0111";
 	commands.fuel = "012F";
 	commands.engine_load = "0104";
+	commands.air_temperature = "010F";
 
 
 	return commands;
@@ -345,7 +346,7 @@ Commands getCommands()
 //------------------------------------------------------------------------------------
 // send to the elm the command , reads from the elm the answer and sets the answer var
 //------------------------------------------------------------------------------------
-int command(int pd, char* command, char* answer)
+int command(int pd, char* command,float* value ,char* unit)
 {
 	int error = SUCCESS;
 	char buf[MAX_MESSEGE_SIZE * sizeof(char)];
@@ -360,6 +361,81 @@ int command(int pd, char* command, char* answer)
 
 	error = recv(pd, buf, MAX_MESSEGE_SIZE);
 	if(error >= ERROR)	{return error;}
-	strcpy(answer, buf);
+	if(strncmp(command, "AT", 2) == 0)
+	{
+		strcpy(unit, buf);
+		return SUCCESS;
+	}
+
+	error = translateELMresponse(buf ,value ,unit);
+	if(error == -1)
+	{
+		printf("ERROR\n");
+	}
+	else if(error == -2)
+	{
+		printf("NO DATA\t");
+	}
+	else
+	{
+		printf("%f%s\t", *value, unit);
+	}
+
 	return SUCCESS;
+}
+// --------------------------------------------------------------------------------------------------------
+//gets a response that was recived from the ELM327 and gives us the value in dec and thr right unit of data
+// --------------------------------------------------------------------------------------------------------
+int translateELMresponse(char* response , float* value , char* units)
+{
+	if(strcmp(response, "NO DATA\n\n>")==0 )
+	{
+		return -2;
+	}
+	if(strncmp(response,"41", 2)!=0)	{return -1;} // 41 resambles a correct answer
+	
+	if(strncmp(response+3, "0D", 2)==0) // speed
+	{
+		*value = hexToDec(response+6, 2);
+		strcpy(units,"Kmph");
+	}
+	else if(strncmp(response+3, "0C", 2)==0)//engine speed
+	{
+		*value = hexToDec(response+6, 5)/4.0;
+		strcpy(units,"rpm");
+	}
+	else if(strncmp(response+3, "11", 2)==0 ||strncmp(response+3, "04", 2)==0 ||strncmp(response+3, "2F", 2)==0)//throtle or engine_load or fual
+	{
+		*value = (hexToDec(response+6, 2)*100)/255.0;
+		units[0] = '%';
+		units[1] = '\0';
+	}
+	else if(strncmp(response+3, "0F", 2)==0 )//air tempartaure
+	{
+		*value = hexToDec(response+6, 2)-40;
+		units[0] = 'c';
+		units[1] = '\0';
+	}
+	return 0;
+}
+
+int hexToDec(char* hex, int size)
+{
+	int i , pow=1;
+	int answer = 0;
+	for (i =size-1; i >= 0; i--)
+	{
+		if(hex[i] >= '0' && hex[i]<='9')
+		{
+			answer+=(hex[i]-'0') * pow;
+			pow*=16;
+		}
+		else if(hex[i] >= 'A' && hex[i]<='F')
+		{
+			answer+=((hex[i]-'A') + 10) * pow;
+			pow*=16;
+		}
+	}
+	return answer;
+	
 }

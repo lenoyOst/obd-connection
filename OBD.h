@@ -76,6 +76,7 @@ typedef struct commands
 	char* throtle;
 	char* fuel;
 	char* engine_load;
+	char* air_temperature;
 
 } Commands;
 
@@ -90,4 +91,6 @@ int recv(int pd, char* msg, int len);
 int disconnect(int pd);
 int OBD();
 Commands getCommands();
-int command(int pd, char* command, char* answer);
+int command(int pd, char* command,float* value ,char* unit);
+int translateELMresponse(char* response , float* value , char* units);
+int hexToDec(char* hex, int size);
