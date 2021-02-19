@@ -12,6 +12,8 @@
 #include <string.h>
 #include <termios.h>
 #include <unistd.h>
+#include <netinet/in.h>
+#include <sys/socket.h>
 #include "log.h"
 
 
@@ -82,15 +84,17 @@ typedef struct commands
 
 int scanSerial(Connections* connections);
 void freeConnections(Connections* connection);
-int connect(char* portname, int *pd);
+int connectToELM327(char* portname, int *pd);
 void printError(int error);
 int set_interface_attribs (int fd, int speed, int parity);
 void set_blocking (int fd, int should_block);
-int send(int pd, char* msg);
-int recv(int pd, char* msg, int len);
+int sendELM(int pd, char* msg);
+int recvELM(int pd, char* msg, int len);
 int disconnect(int pd);
 int OBD();
 Commands getCommands();
 int command(int pd, char* command,float* value ,char* unit);
 int translateELMresponse(char* response , float* value , char* units);
 int hexToDec(char* hex, int size);
+int sendToSqlServer(char* values , int fd,int size);
+int connectToSqlServer();

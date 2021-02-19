@@ -110,7 +110,7 @@ void freeConnections(Connections* connection)
 // trying to initialis communication with the elm327
 //---------------------------------------------------
 
-int connect(char* portname, int* pd)
+int connectToELM327(char* portname, int* pd)
 {
 	char sys[100] = "sudo chmod 777 ";
 	char buf[MAX_MESSEGE_SIZE];
@@ -176,7 +176,7 @@ int disconnect(int pd)
 // send's messege to obd
 // --------------------
 
-int send(int pd, char* msg)
+int sendELM(int pd, char* msg)
 {
 	int len = strlen(msg), i;
 	char text[len+3];
@@ -199,7 +199,7 @@ int send(int pd, char* msg)
 // --------------------------------------------------------------------
 // reads a massege from the connection that we created with the elm327
 // --------------------------------------------------------------------
-int recv(int pd, char* msg, int len)
+int recvELM(int pd, char* msg, int len)
 {
 	int n;
 	char arr[MAX_MESSEGE_SIZE];
@@ -279,6 +279,9 @@ void set_blocking (int fd, int should_block)
 		printf("error3");
 }
 
+// -------------------------------------------------
+//finds the serial port that the obd is connected to
+// -------------------------------------------------
 int OBD()
 {
 	Connections connections;
@@ -295,12 +298,12 @@ int OBD()
 		return -1;
 	}
 	// ------------------------------------------------------------------------------------------------------------------------------------
-	// connect to OBD - checks all the serial portsthat we found and finds the one that has ELM327 v1.5 connected , if we cound not fine one we exit
+	// connect to OBD - checks all the serial ports that we found and finds the one that has ELM327 v1.5 connected , if we cound not fine one we exit
 	// -------------------------------------------------------------------------------------------------------------------------------------
 	
 	for(i=0;i<connections.size;i++)
 	{
-		error = connect(connections.list[i], &pd);
+		error = connectToELM327(connections.list[i], &pd);
 		if(error == SUCCESS)
 			break;
 	}
@@ -351,7 +354,7 @@ int command(int pd, char* command,float* value ,char* unit)
 	int error = SUCCESS;
 	char buf[MAX_MESSEGE_SIZE * sizeof(char)];
 
-	error = send(pd, command);
+	error = sendELM(pd, command);
 	if(error >= ERROR)	{return error;}
 
 	if(strcmp(command, getCommands().reset)==0)
@@ -359,7 +362,7 @@ int command(int pd, char* command,float* value ,char* unit)
 
 	usleep(230000);
 
-	error = recv(pd, buf, MAX_MESSEGE_SIZE);
+	error = recvELM(pd, buf, MAX_MESSEGE_SIZE);
 	if(error >= ERROR)	{return error;}
 	if(strncmp(command, "AT", 2) == 0)
 	{
@@ -438,4 +441,42 @@ int hexToDec(char* hex, int size)
 	}
 	return answer;
 	
+}
+
+// ----------------------------------------
+// upload data to server
+// ----------------------------------------
+
+int connectToSqlServer(int *fd)
+{
+	char* carid = ""; //
+	char* userid = ""; //
+	char* password = ""; // values for Identification with the server
+
+	int size = sizeof(carid) + sizeof(userid) + sizeof(password);
+	char* msg = malloc(sizeof(carid) + sizeof(userid) + sizeof(password));
+	
+	int sock = socket(AF_INET,SOCK_STREAM,0);
+	//setting the servers socket info
+	struct sockaddr_in server;
+	bzero(&server,sizeof(server));
+	server.sin_family = AF_INET;
+	server.sin_addr.s_addr = inet_addr("84.94.84.90");
+	server.sin_port = htons(5555);
+
+	if((*fd = connect(sock, &server , sizeof(server))) < 0){return ERROR;}
+	write(*fd , msg ,size); //identifies 
+
+	free(msg);
+	free(userid);
+	free(carid);
+	free(password);
+}
+int sendToSqlServer(char* values,int size , int fd)
+{
+	char* msg = malloc(size + 4);
+	strcat(msg , "set ");
+	strcat(msg , values);
+	write(fd , msg ,size + 4);
+	free(msg);
 }
