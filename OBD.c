@@ -121,7 +121,7 @@ int connectToELM327(char* portname, int* pd)
 		sys[i+15] = portname[i];
 	}
 	system(sys);
-	*pd = open (portname, O_RDWR | O_NOCTTY | O_NDELAY);
+	*pd = open(portname, O_RDWR | O_NOCTTY | O_NDELAY);
 	if (*pd < 0)
 	{
 		strcpy(arr, "-");
@@ -130,7 +130,6 @@ int connectToELM327(char* portname, int* pd)
 		writeToLog(arr);
 		return NOT_OBD;
 	}
-
 	set_interface_attribs (*pd, B38400, 0);
 	set_blocking (*pd, 1);
 	
@@ -151,7 +150,6 @@ int connectToELM327(char* portname, int* pd)
 		writeToLog(arr);
 		return SUCCESS;
 	}
-	
 	disconnect(*pd);
 	strcpy(arr, "-unexpected answer from "); 
 	strcat(arr, portname);
@@ -374,10 +372,12 @@ int command(int pd, char* command,float* value ,char* unit)
 	if(error == -1)
 	{
 		printf("ERROR\n");
+		return NO_DATA_ERROR;
 	}
 	else if(error == -2)
 	{
 		printf("NO DATA\t");
+		return NO_DATA_ERROR;
 	}
 	else
 	{
@@ -454,4 +454,15 @@ int sendToSqlServer(char* values,int size , int fd)
 	strcat(msg , "set ");
 	strcat(msg , values);
 	write(fd , msg ,size + 4);
+	read(fd , msg ,3);
+	if(strncmp(msg , "bye",3) == 0)
+	{
+		return ERROR;
+	}
+	if(strncmp(msg , "ok",2) == 0)
+	{
+		printf("ok\n");
+	}
+	puts(msg);
+	return SUCCESS;
 }

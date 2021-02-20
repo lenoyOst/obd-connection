@@ -50,6 +50,7 @@
 #define READ_ERROR 8
 #define CLOSE_ERROR 9
 #define CAR_NOT_CONNECTED_ERROR 10
+#define NO_DATA_ERROR 10
 
 typedef struct connections
 {

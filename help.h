@@ -30,3 +30,4 @@ int onlyLetters(char* string);
 int emailPattern(char* string);
 
 int onlyLettersAndNumbers(char* string);
+int isIp(char* string);
