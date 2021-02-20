@@ -347,65 +347,73 @@ int onlyLettersAndNumbers(char* string)
 //
 int isIp(char* string)
 {
-
 	int len = strlen(string);
     int i = 0;
+	int j = 0;
     char number[3];
     number[0]='\0';
     int check;
-    
    
-    if(len > 15 || len<7)
-    {
-        return 0;
-    }
+    if(len > 15 || len<7){return 0;}
 
-    while(string[i]!='.' || i==3)
+    while(string[i]!='.' && j < 3 && len != i)
     {
-        number[i] = string[i];
+        number[j] = string[i];
         i++;
+		j++;
     }
-   
+	if(j < 3)
+		number[j] = '\0'; 
+	
     if(stringToInt(number,&check) < 0 ){return 0;}
-    if(check>255 || check<0 || i<1 || string[i]!='.' || i==len)
-        return 0;
+    if(check>255 || check<0 || i<1 || string[i]!='.' || i>=len){return 0;}
+	
     number[0]='\0';
-
-    while(string[i]!='.' || i==7)
+	j = 0;
+	i++;
+	
+    while(string[i]!='.' && j < 3 && len != i)
     {
-        number[i] = string[i];
+        number[j] = string[i];
         i++;
+		j++;
     }
-    
+	if(j < 3)
+		number[j] = '\0'; 
+		
     if(stringToInt(number,&check) < 0 ){return 0;}
-    if(check>255 || check<0 || i<3 || string[i]!='.' || i==len)
-        {return 0;}
+    if(check>255 || check<0 || i<3 || string[i]!='.' || i>=len){return 0;}
+		
     number[0]='\0';
-
-     while(string[i]!='.' || i==11)
+	j = 0;
+	i++;
+	
+    while(string[i]!='.' && j < 3 && len != i)
     {
-        number[i] = string[i];
+        number[j] = string[i];
         i++;
+		j++;
     }
+	if(j < 3)
+		number[j] = '\0';
+		
     if(stringToInt(number,&check) < 0 ){return 0;}
-    if(check>255 || check<0 || i<5 || string[i]!='.' || i==len)
-    {
-        return 0;
-    }
+    if(check>255 || check<0 || i<5 || string[i]!='.' || i>=len) {return 0;}
+	
     number[0]='\0';
-
-     while(i<len)
+	j = 0;
+	i++;
+	
+    while(i < len && j < 3)
     {
-        number[i] = string[i];
+        number[j] = string[i];
         i++;
+		j++;
     }
-    
+	if(j < 3)
+		number[j] = '\0'; 
+		
     if(stringToInt(number,&check) < 0 ){return 0;}
-    if(check>255 || check<0 )
-    {
-        return 0;
-    }
+    if(check>255 || check<0 || i < len){return 0;}
     return 1;
-
-
 }
