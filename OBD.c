@@ -447,36 +447,11 @@ int hexToDec(char* hex, int size)
 // upload data to server
 // ----------------------------------------
 
-int connectToSqlServer(int *fd)
-{
-	char* carid = ""; //
-	char* userid = ""; //
-	char* password = ""; // values for Identification with the server
-
-	int size = sizeof(carid) + sizeof(userid) + sizeof(password);
-	char* msg = malloc(sizeof(carid) + sizeof(userid) + sizeof(password));
-	
-	int sock = socket(AF_INET,SOCK_STREAM,0);
-	//setting the servers socket info
-	struct sockaddr_in server;
-	bzero(&server,sizeof(server));
-	server.sin_family = AF_INET;
-	server.sin_addr.s_addr = inet_addr("84.94.84.90");
-	server.sin_port = htons(5555);
-
-	if((*fd = connect(sock, &server , sizeof(server))) < 0){return ERROR;}
-	write(*fd , msg ,size); //identifies 
-
-	free(msg);
-	free(userid);
-	free(carid);
-	free(password);
-}
 int sendToSqlServer(char* values,int size , int fd)
 {
-	char* msg = malloc(size + 4);
+	char msg[size + 4];
+	msg[0] = '\0';
 	strcat(msg , "set ");
 	strcat(msg , values);
 	write(fd , msg ,size + 4);
-	free(msg);
 }
