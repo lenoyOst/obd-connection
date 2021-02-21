@@ -459,10 +459,5 @@ int sendToSqlServer(char* values,int size , int fd)
 	{
 		return ERROR;
 	}
-	if(strncmp(msg , "ok",2) == 0)
-	{
-		printf("ok\n");
-	}
-	puts(msg);
 	return SUCCESS;
 }

@@ -3,5 +3,1473 @@
 -/dev/ttyS1 is not obd
 -/dev/ttyS2 is not obd
 -write: ATZ
--read: ATZ\n\n\nELM327 v1.5\n\n>
+-read: \n\nELM327 v1.5\n\n>
 -obd found: /dev/ttyS3
+-write: ATE0
+-read: ATE0\nOK\n\n>
+-write: 010C
+-read: 41 0C 0D 4C \n\n>
+-write: 010D
+-read: 41 0D 00 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 1D \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 6C \n\n>
+-write: 010C
+-read: 41 0C 0D 43 \n\n>
+-write: 010D
+-read: 41 0D 00 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 1F \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 6C \n\n>
+-write: 010C
+-read: 41 0C 0D 57 \n\n>
+-write: 010D
+-read: 41 0D 00 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 1D \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 6C \n\n>
+-write: 010C
+-read: 41 0C 0D 4A \n\n>
+-write: 010D
+-read: 41 0D 00 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 1F \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 6C \n\n>
+-write: 010C
+-read: 41 0C 0D 43 \n\n>
+-write: 010D
+-read: 41 0D 00 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 1F \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 6C \n\n>
+-write: 010C
+-read: 41 0C 0D 5B \n\n>
+-write: 010D
+-read: 41 0D 00 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 1E \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 6C \n\n>
+-write: 010C
+-read: 41 0C 0D 47 \n\n>
+-write: 010D
+-read: 41 0D 00 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 1C \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 6C \n\n>
+-write: 010C
+-read: 41 0C 0D 4A \n\n>
+-write: 010D
+-read: 41 0D 00 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 1E \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 6C \n\n>
+-write: 010C
+-read: 41 0C 0D 46 \n\n>
+-write: 010D
+-read: 41 0D 00 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 1E \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 6C \n\n>
+-write: 010C
+-read: 41 0C 0D 4A \n\n>
+-write: 010D
+-read: 41 0D 00 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 1E \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 6C \n\n>
+-write: 010C
+-read: 41 0C 0D 55 \n\n>
+-write: 010D
+-read: 41 0D 00 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 1E \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 6C \n\n>
+-write: 010C
+-read: 41 0C 0D 50 \n\n>
+-write: 010D
+-read: 41 0D 00 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 1C \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 6C \n\n>
+-write: 010C
+-read: 41 0C 0D 49 \n\n>
+-write: 010D
+-read: 41 0D 00 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 20 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 6C \n\n>
+-write: 010C
+-read: 41 0C 0D 41 \n\n>
+-write: 010D
+-read: 41 0D 00 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 1F \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 6C \n\n>
+-write: 010C
+-read: 41 0C 10 8C \n\n>
+-write: 010D
+-read: 41 0D 01 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 3D \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 6C \n\n>
+-write: 010C
+-read: 41 0C 0D 8E \n\n>
+-write: 010D
+-read: 41 0D 06 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 C7 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 6C \n\n>
+-write: 010C
+-read: 41 0C 0E A6 \n\n>
+-write: 010D
+-read: 41 0D 09 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 13 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 6C \n\n>
+-write: 010C
+-read: 41 0C 0E 31 \n\n>
+-write: 010D
+-read: 41 0D 0A \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 26 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 6C \n\n>
+-write: 010C
+-read: 41 0C 0F F2 \n\n>
+-write: 010D
+-read: 41 0D 0A \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 6E \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 6C \n\n>
+-write: 010C
+-read: 41 0C 14 83 \n\n>
+-write: 010D
+-read: 41 0D 0D \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 1A \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 6C \n\n>
+-write: 010C
+-read: 41 0C 14 12 \n\n>
+-write: 010D
+-read: 41 0D 0D \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 08 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 6C \n\n>
+-write: 010C
+-read: 41 0C 11 22 \n\n>
+-write: 010D
+-read: 41 0D 0B \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 12 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 6B \n\n>
+-write: 010C
+-read: 41 0C 0E 32 \n\n>
+-write: 010D
+-read: 41 0D 06 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 21 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 6B \n\n>
+-write: 010C
+-read: 41 0C 0D 78 \n\n>
+-write: 010D
+-read: 41 0D 00 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 52 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 6B \n\n>
+-write: 010C
+-read: 41 0C 18 D2 \n\n>
+-write: 010D
+-read: 41 0D 04 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 44 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 6B \n\n>
+-write: 010C
+-read: 41 0C 19 6D \n\n>
+-write: 010D
+-read: 41 0D 06 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 57 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 6A \n\n>
+-write: 010C
+-read: 41 0C 20 92 \n\n>
+-write: 010D
+-read: 41 0D 0D \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 4B \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 6A \n\n>
+-write: 010C
+-read: 41 0C 1E 1C \n\n>
+-write: 010D
+-read: 41 0D 13 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 4C \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 69 \n\n>
+-write: 010C
+-read: 41 0C 1F 04 \n\n>
+-write: 010D
+-read: 41 0D 14 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 0B \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 69 \n\n>
+-write: 010C
+-read: 41 0C 15 06 \n\n>
+-write: 010D
+-read: 41 0D 0D \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 1F \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 69 \n\n>
+-write: 010C
+-read: 41 0C 10 73 \n\n>
+-write: 010D
+-read: 41 0D 0B \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 3A \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 69 \n\n>
+-write: 010C
+-read: 41 0C 15 50 \n\n>
+-write: 010D
+-read: 41 0D 0E \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 2C \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 69 \n\n>
+-write: 010C
+-read: 41 0C 19 88 \n\n>
+-write: 010D
+-read: 41 0D 10 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 01 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 68 \n\n>
+-write: 010C
+-read: 41 0C 0F C9 \n\n>
+-write: 010D
+-read: 41 0D 10 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 21 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 68 \n\n>
+-write: 010C
+-read: 41 0C 0E 1C \n\n>
+-write: 010D
+-read: 41 0D 0A \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 2D \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 69 \n\n>
+-write: 010C
+-read: 41 0C 12 02 \n\n>
+-write: 010D
+-read: 41 0D 09 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 42 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 68 \n\n>
+-write: 010C
+-read: 41 0C 18 69 \n\n>
+-write: 010D
+-read: 41 0D 10 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 5D \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 68 \n\n>
+-write: 010C
+-read: 41 0C 23 53 \n\n>
+-write: 010D
+-read: 41 0D 17 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 47 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 67 \n\n>
+-write: 010C
+-read: 41 0C 28 B5 \n\n>
+-write: 010D
+-read: 41 0D 1C \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 00 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 66 \n\n>
+-write: 010C
+-read: 41 0C 12 A9 \n\n>
+-write: 010D
+-read: 41 0D 15 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 22 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 66 \n\n>
+-write: 010C
+-read: 41 0C 0E 3D \n\n>
+-write: 010D
+-read: 41 0D 0D \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 22 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 67 \n\n>
+-write: 010C
+-read: 41 0C 0E 34 \n\n>
+-write: 010D
+-read: 41 0D 08 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 7B \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 67 \n\n>
+-write: 010C
+-read: 41 0C 18 AC \n\n>
+-write: 010D
+-read: 41 0D 0F \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 4F \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 66 \n\n>
+-write: 010C
+-read: 41 0C 1F B9 \n\n>
+-write: 010D
+-read: 41 0D 15 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 A5 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 66 \n\n>
+-write: 010C
+-read: 41 0C 2D 13 \n\n>
+-write: 010D
+-read: 41 0D 1D \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 3C \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 63 \n\n>
+-write: 010C
+-read: 41 0C 21 33 \n\n>
+-write: 010D
+-read: 41 0D 22 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 C2 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 63 \n\n>
+-write: 010C
+-read: 41 0C 2B 62 \n\n>
+-write: 010D
+-read: 41 0D 2C \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 43 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 62 \n\n>
+-write: 010C
+-read: 41 0C 2E 92 \n\n>
+-write: 010D
+-read: 41 0D 2F \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 00 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 61 \n\n>
+-write: 010C
+-read: 41 0C 1B 5B \n\n>
+-write: 010D
+-read: 41 0D 25 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 08 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 61 \n\n>
+-write: 010C
+-read: 41 0C 0E A6 \n\n>
+-write: 010D
+-read: 41 0D 17 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 AB \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 62 \n\n>
+-write: 010C
+-read: 41 0C 24 0C \n\n>
+-write: 010D
+-read: 41 0D 19 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 9E \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 61 \n\n>
+-write: 010C
+-read: 41 0C 20 4A \n\n>
+-write: 010D
+-read: 41 0D 21 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 6B \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 60 \n\n>
+-write: 010C
+-read: 41 0C 25 DB \n\n>
+-write: 010D
+-read: 41 0D 26 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 92 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 5F \n\n>
+-write: 010C
+-read: 41 0C 22 32 \n\n>
+-write: 010D
+-read: 41 0D 29 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 DF \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 5F \n\n>
+-write: 010C
+-read: 41 0C 20 AD \n\n>
+-write: 010D
+-read: 41 0D 31 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 04 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 5D \n\n>
+-write: 010C
+-read: 41 0C 12 64 \n\n>
+-write: 010D
+-read: 41 0D 30 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 1A \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 5E \n\n>
+-write: 010C
+-read: 41 0C 0E 67 \n\n>
+-write: 010D
+-read: 41 0D 26 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 1D \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 5E \n\n>
+-write: 010C
+-read: 41 0C 0E 3C \n\n>
+-write: 010D
+-read: 41 0D 1A \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 7C \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 5F \n\n>
+-write: 010C
+-read: 41 0C 19 A5 \n\n>
+-write: 010D
+-read: 41 0D 19 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 1A \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 5E \n\n>
+-write: 010C
+-read: 41 0C 19 8E \n\n>
+-write: 010D
+-read: 41 0D 1A \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 92 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 5D \n\n>
+-write: 010C
+-read: 41 0C 20 C8 \n\n>
+-write: 010D
+-read: 41 0D 22 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 77 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 5C \n\n>
+-write: 010C
+-read: 41 0C 28 2F \n\n>
+-write: 010D
+-read: 41 0D 29 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 04 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 59 \n\n>
+-write: 010C
+-read: 41 0C 26 85 \n\n>
+-write: 010D
+-read: 41 0D 27 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 00 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 59 \n\n>
+-write: 010C
+-read: 41 0C 21 F4 \n\n>
+-write: 010D
+-read: 41 0D 21 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 00 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 59 \n\n>
+-write: 010C
+-read: 41 0C 1B 38 \n\n>
+-write: 010D
+-read: 41 0D 1B \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 25 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 59 \n\n>
+-write: 010C
+-read: 41 0C 1B B4 \n\n>
+-write: 010D
+-read: 41 0D 1C \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 0D \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 59 \n\n>
+-write: 010C
+-read: 41 0C 1B 3D \n\n>
+-write: 010D
+-read: 41 0D 1C \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 0E \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 59 \n\n>
+-write: 010C
+-read: 41 0C 1C 2C \n\n>
+-write: 010D
+-read: 41 0D 1C \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 0F \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 59 \n\n>
+-write: 010C
+-read: 41 0C 1C 80 \n\n>
+-write: 010D
+-read: 41 0D 1D \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 37 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 58 \n\n>
+-write: 010C
+-read: 41 0C 1F 59 \n\n>
+-write: 010D
+-read: 41 0D 20 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 01 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 58 \n\n>
+-write: 010C
+-read: 41 0C 11 8D \n\n>
+-write: 010D
+-read: 41 0D 1E \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 18 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 59 \n\n>
+-write: 010C
+-read: 41 0C 0E 22 \n\n>
+-write: 010D
+-read: 41 0D 17 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 23 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 59 \n\n>
+-write: 010C
+-read: 41 0C 0E 06 \n\n>
+-write: 010D
+-read: 41 0D 12 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 43 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 5A \n\n>
+-write: 010C
+-read: 41 0C 1B D6 \n\n>
+-write: 010D
+-read: 41 0D 12 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 38 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 59 \n\n>
+-write: 010C
+-read: 41 0C 16 1D \n\n>
+-write: 010D
+-read: 41 0D 13 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 17 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 59 \n\n>
+-write: 010C
+-read: 41 0C 0E 4F \n\n>
+-write: 010D
+-read: 41 0D 08 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 22 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 59 \n\n>
+-write: 010C
+-read: 41 0C 0E 20 \n\n>
+-write: 010D
+-read: 41 0D 02 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 20 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 5A \n\n>
+-write: 010C
+-read: 41 0C 0D 4E \n\n>
+-write: 010D
+-read: 41 0D 00 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 29 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 5A \n\n>
+-write: 010C
+-read: 41 0C 14 D4 \n\n>
+-write: 010D
+-read: 41 0D 00 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 B4 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 5A \n\n>
+-write: 010C
+-read: 41 0C 4B A9 \n\n>
+-write: 010D
+-read: 41 0D 00 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 3A \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 58 \n\n>
+-write: 010C
+-read: 41 0C 3E 22 \n\n>
+-write: 010D
+-read: 41 0D 00 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 00 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 57 \n\n>
+-write: 010C
+-read: 41 0C 22 5C \n\n>
+-write: 010D
+-read: 41 0D 00 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 00 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 58 \n\n>
+-write: 010C
+-read: 41 0C 1F A4 \n\n>
+-write: 010D
+-read: 41 0D 01 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 62 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 59 \n\n>
+-write: 010C
+-read: 41 0C 1E 68 \n\n>
+-write: 010D
+-read: 41 0D 0B \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 1A \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 59 \n\n>
+-write: 010C
+-read: 41 0C 0D C8 \n\n>
+-write: 010D
+-read: 41 0D 08 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 1C \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 5A \n\n>
+-write: 010C
+-read: 41 0C 0D 68 \n\n>
+-write: 010D
+-read: 41 0D 07 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 20 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 5A \n\n>
+-write: 010C
+-read: 41 0C 0D 61 \n\n>
+-write: 010D
+-read: 41 0D 08 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 21 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 5B \n\n>
+-write: 010C
+-read: 41 0C 0D 61 \n\n>
+-write: 010D
+-read: 41 0D 0A \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 22 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 5C \n\n>
+-write: 010C
+-read: 41 0C 0D 54 \n\n>
+-write: 010D
+-read: 41 0D 08 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 21 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 5C \n\n>
+-write: 010C
+-read: 41 0C 0D 4A \n\n>
+-write: 010D
+-read: 41 0D 04 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 22 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 5C \n\n>
+-write: 010C
+-read: 41 0C 0D 43 \n\n>
+-write: 010D
+-read: 41 0D 00 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 21 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 5C \n\n>
+-write: 010C
+-read: 41 0C 0D 47 \n\n>
+-write: 010D
+-read: 41 0D 00 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 20 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 5D \n\n>
+-write: 010C
+-read: 41 0C 0D 41 \n\n>
+-write: 010D
+-read: 41 0D 00 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 22 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 5D \n\n>
+-write: 010C
+-read: 41 0C 0D 3C \n\n>
+-write: 010D
+-read: 41 0D 02 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 2A \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 5D \n\n>
+-write: 010C
+-read: 41 0C 0D 58 \n\n>
+-write: 010D
+-read: 41 0D 00 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 20 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 5D \n\n>
+-write: 010C
+-read: 41 0C 0D 50 \n\n>
+-write: 010D
+-read: 41 0D 00 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 20 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 5D \n\n>
+-write: 010C
+-read: 41 0C 0D 23 \n\n>
+-write: 010D
+-read: 41 0D 00 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 23 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 5E \n\n>
+-write: 010C
+-read: 41 0C 0D 34 \n\n>
+-write: 010D
+-read: 41 0D 04 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 22 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 5E \n\n>
+-write: 010C
+-read: 41 0C 0D 58 \n\n>
+-write: 010D
+-read: 41 0D 05 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 23 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 5E \n\n>
+-write: 010C
+-read: 41 0C 0D 53 \n\n>
+-write: 010D
+-read: 41 0D 04 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 22 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 5E \n\n>
+-write: 010C
+-read: 41 0C 0D 62 \n\n>
+-write: 010D
+-read: 41 0D 04 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 20 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 5E \n\n>
+-write: 010C
+-read: 41 0C 0D 48 \n\n>
+-write: 010D
+-read: 41 0D 03 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 63 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 5E \n\n>
+-write: 010C
+-read: 41 0C 0F 87 \n\n>
+-write: 010D
+-read: 41 0D 07 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 BD \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 5E \n\n>
+-write: 010C
+-read: 41 0C 15 D3 \n\n>
+-write: 010D
+-read: 41 0D 0E \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 39 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 5E \n\n>
+-write: 010C
+-read: 41 0C 1C 82 \n\n>
+-write: 010D
+-read: 41 0D 12 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 07 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 5E \n\n>
+-write: 010C
+-read: 41 0C 11 98 \n\n>
+-write: 010D
+-read: 41 0D 12 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 21 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 5E \n\n>
+-write: 010C
+-read: 41 0C 0D A4 \n\n>
+-write: 010D
+-read: 41 0D 0E \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 2F \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 5E \n\n>
+-write: 010C
+-read: 41 0C 0D BA \n\n>
+-write: 010D
+-read: 41 0D 0C \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 21 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 5E \n\n>
+-write: 010C
+-read: 41 0C 0D B9 \n\n>
+-write: 010D
+-read: 41 0D 0A \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 60 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 5E \n\n>
+-write: 010C
+-read: 41 0C 11 FC \n\n>
+-write: 010D
+-read: 41 0D 0C \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 19 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 5F \n\n>
+-write: 010C
+-read: 41 0C 17 CB \n\n>
+-write: 010D
+-read: 41 0D 04 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 20 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 5F \n\n>
+-write: 010C
+-read: 41 0C 0E 04 \n\n>
+-write: 010D
+-read: 41 0D 04 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 20 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 5F \n\n>
+-write: 010C
+-read: 41 0C 0D 8D \n\n>
+-write: 010D
+-read: 41 0D 03 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 23 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 5F \n\n>
+-write: 010C
+-read: 41 0C 0E 3F \n\n>
+-write: 010D
+-read: 41 0D 04 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 1E \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 5F \n\n>
+-write: 010C
+-read: 41 0C 0D 81 \n\n>
+-write: 010D
+-read: 41 0D 03 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 20 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 5F \n\n>
+-write: 010C
+-read: 41 0C 0D 4F \n\n>
+-write: 010D
+-read: 41 0D 02 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 1D \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 5F \n\n>
+-write: 010C
+-read: 41 0C 0D 1F \n\n>
+-write: 010D
+-read: 41 0D 00 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 3D \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 60 \n\n>
+-write: 010C
+-read: 41 0C 0E 03 \n\n>
+-write: 010D
+-read: 41 0D 01 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 29 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 60 \n\n>
+-write: 010C
+-read: 41 0C 0E 61 \n\n>
+-write: 010D
+-read: 41 0D 01 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 23 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 60 \n\n>
+-write: 010C
+-read: 41 0C 0C C2 \n\n>
+-write: 010D
+-read: 41 0D 00 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 1E \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 60 \n\n>
+-write: 010C
+-read: 41 0C 0D 74 \n\n>
+-write: 010D
+-read: 41 0D 00 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 20 \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 60 \n\n>
+-write: 010C
+-read: 41 0C 0D 66 \n\n>
+-write: 010D
+-read: 41 0D 00 \n\n>
+-write: 0111
+-read: 41 11 E6 \n\n>
+-write: 0104
+-read: 41 04 1E \n\n>
+-write: 012F
+-read: NO DATA\n\n>
+-write: 010F
+-read: 41 0F 60 \n\n>
+-write: 010C
+-port closed
