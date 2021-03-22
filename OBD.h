@@ -73,6 +73,30 @@ typedef struct commands
 	char* linefeeds_off;
 	char* linefeeds_on;
 	char* set_protocol_auto;
+
+	char* monitor;
+
+	char* pin1;
+	char* pin2;
+	char* pin3;
+	char* pin4;
+	char* pin5;
+	char* pin6;
+	char* pin7;
+	char* pin8;
+	char* pin9;
+	char* pin10;
+	char* pin11;
+	char* pin12;
+	char* pin13;
+	char* pin14;
+	char* pin15;
+	char* pin16;
+
+	char* config_monitor;
+	char* long_msg_ON;
+	char* protocolJ1939;
+
 	//mode1 commands
 	char* rpm;
 	char* speed;
@@ -80,6 +104,8 @@ typedef struct commands
 	char* fuel;
 	char* engine_load;
 	char* air_temperature;
+
+	char* stam;
 
 } Commands;
 

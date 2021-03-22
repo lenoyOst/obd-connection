@@ -219,7 +219,6 @@ int recvELM(int pd, char* msg, int len)
 	if(strcmp(msg , "SEARCHING...\nUNABLE TO CONNECT\n\n>") == 0){return CAR_NOT_CONNECTED_ERROR;}
 	return SUCCESS;
 }
-
 int set_interface_attribs (int fd, int speed, int parity)
 {
         struct termios tty;
@@ -333,6 +332,13 @@ Commands getCommands()
 	commands.linefeeds_off="ATL0";
 	commands.linefeeds_on="ATL1";
 	commands.set_protocol_auto="ATSP0";
+	commands.monitor = "ATMA";
+	commands.config_monitor = "ATPBC001";
+	commands.long_msg_ON = "ATAL";
+	commands.protocolJ1939 = "ATSPB";
+	commands.stam = "stam";
+
+	commands.pin1 = "ATMR11";
 
 	commands.rpm = "010C";
 	commands.speed = "010D";
