@@ -382,7 +382,7 @@ int command(int pd, char* command,float* value ,char* unit)
 
 	usleep(230000);*/
 
-	error = recvELM(pd, buf, MAX_MESSEGE_SIZE);
+	error = recvELM2(pd, buf, MAX_MESSEGE_SIZE);
 	if(error >= ERROR)	{return error;}
 	if(strncmp(command, "AT", 2) == 0)
 	{
