@@ -220,6 +220,28 @@ int recvELM(int pd, char* msg, int len)
 	return SUCCESS;
 }
 
+int recvELM2(int pd, char* msg, int len)
+{
+	int n = 0, bytes = 0;
+	char arr[MAX_MESSEGE_SIZE] = "";
+
+	while(n==0 || msg[n-1] != '>')
+	{
+		bytes = read (pd, msg + n, len - n);
+		if(bytes<0)	{writeToLog("-exited read with -1");return READ_ERROR;}
+		n+=bytes;
+	}
+
+	msg[n] = '\0';
+	strcpy(arr, "-read: ");
+	strcat(arr, msg);
+	writeToLog(arr);
+
+	if(strcmp(msg , "CAN ERROR\n\n>") == 0){return CAR_NOT_CONNECTED_ERROR;}
+	if(strcmp(msg , "SEARCHING...\nUNABLE TO CONNECT\n\n>") == 0){return CAR_NOT_CONNECTED_ERROR;}
+	return SUCCESS;
+}
+
 int set_interface_attribs (int fd, int speed, int parity)
 {
         struct termios tty;
@@ -355,10 +377,10 @@ int command(int pd, char* command,float* value ,char* unit)
 	error = sendELM(pd, command);
 	if(error >= ERROR)	{return error;}
 
-	if(strcmp(command, getCommands().reset)==0)
+	/*if(strcmp(command, getCommands().reset)==0)
 		sleep(1);
 
-	usleep(230000);
+	usleep(230000);*/
 
 	error = recvELM(pd, buf, MAX_MESSEGE_SIZE);
 	if(error >= ERROR)	{return error;}
