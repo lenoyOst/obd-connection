@@ -7,12 +7,47 @@
 -read: \n\nELM327 v1.5\n\n>
 -obd found: /dev/ttyS4
 -write: ATE0
--write: ATSPB
--write: ATL0
--write: ATAL
--write: ATPBC001
--write: ATH0
--write: ATMA
--write: ATMA
--write: ATMA
+-read: ATE0\nOK\n\n>
+-write: ATIGN
+-exited read with -1
+-write: 010C
+-read: ON\n\n>
+-write: 010D
+-write: 0161
+-write: 011E
+-write: ATIGN
+-exited read with -1
+-write: 010C
+-read: ON\n\n>
+-write: 010D
+-write: 0161
+-write: 011E
+-write: ATIGN
+-exited read with -1
+-write: 010C
+-read: ON\n\n>
+-write: 010D
+-write: 0161
+-write: 011E
+-write: ATIGN
+-exited read with -1
+-write: 010C
+-read: ON\n\n>
+-write: 010D
+-write: 0161
+-write: 011E
+-write: ATIGN
+-exited read with -1
+-write: 010C
+-read: ON\n\n>
+-write: 010D
+-write: 0161
+-write: 011E
+-write: ATIGN
+-exited read with -1
+-write: 010C
+-read: ON\n\n>
+-write: 010D
+-write: 0161
+-write: 011E
 -port closed

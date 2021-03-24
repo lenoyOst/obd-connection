@@ -10,7 +10,7 @@ void clean_up(int cond, int sock)
 }
 
 // -------------------------------------------------------
-// creating a new client that tries to connect to our server
+// creating a new client that tries to connect to a server with the reqwested ip and port
 // -------------------------------------------------------
 int openClient(char* ip, int port)
 {
@@ -20,7 +20,7 @@ int openClient(char* ip, int port)
 	sock = socket(AF_INET,SOCK_STREAM,0);
 	if(sock < 0)
 	{
-		exit(1);
+		return -1;
 	}
 	bzero(&client_name,sizeof(client_name));
 	client_name.sin_family = AF_INET;
@@ -29,7 +29,8 @@ int openClient(char* ip, int port)
 	
 	if(connect(sock, (struct sockaddr *)&client_name, sizeof(client_name)) < 0)
 	{
-		clean_up(2, sock);
+		close(sock);
+		return -1;
 	}
 	
 	return sock;

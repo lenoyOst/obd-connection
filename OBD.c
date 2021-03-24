@@ -207,7 +207,7 @@ int recvELM(int pd, char* msg, int len)
 	{
 		return CAR_NOT_CONNECTED_ERROR;
 	}
-	else if(strncmp(msg , "SE" ,2) == 0) 
+	else if(strncmp(msg , "SE" ,2) == 0)// in case of searching
 	{
 		sleep(2);
 		n += read (pd, msg + n, len);
@@ -219,9 +219,6 @@ int recvELM(int pd, char* msg, int len)
 	if(strcmp(msg , "SEARCHING...\nUNABLE TO CONNECT\n\n>") == 0){return CAR_NOT_CONNECTED_ERROR;}
 	return SUCCESS;
 }
-<<<<<<< HEAD
-=======
-
 int recvELM2(int pd, char* msg, int len)
 {
 	int n = 0, bytes = 0;
@@ -244,7 +241,6 @@ int recvELM2(int pd, char* msg, int len)
 	return SUCCESS;
 }
 
->>>>>>> 22ce346a25c4fdf1037506f08c46f66a2ce07acd
 int set_interface_attribs (int fd, int speed, int parity)
 {
         struct termios tty;
@@ -346,6 +342,7 @@ Commands getCommands()
 {
 	Commands commands;
 
+	commands.engine_inputLevel = "ATIGN";
 	commands.echo_off="ATE0";
 	commands.echo_on="ATE1";
 	commands.header_off="ATH0";
@@ -363,15 +360,15 @@ Commands getCommands()
 	commands.long_msg_ON = "ATAL";
 	commands.protocolJ1939 = "ATSPB";
 	commands.stam = "stam";
-
-	commands.pin1 = "ATMR11";
-
+	
 	commands.rpm = "010C";
 	commands.speed = "010D";
 	commands.throtle = "0111";
 	commands.fuel = "012F";
 	commands.engine_load = "0104";
 	commands.air_temperature = "010F";
+	commands.Drivers_throtlePrecent = "0161";
+	commands.aux_connected = "011E";
 
 
 	return commands;
@@ -387,12 +384,11 @@ int command(int pd, char* command,float* value ,char* unit)
 	error = sendELM(pd, command);
 	if(error >= ERROR)	{return error;}
 
-	/*if(strcmp(command, getCommands().reset)==0)
-		sleep(1);
+	if(strcmp(command , getCommands().reset) == 0)	{sleep(1);}
 
-	usleep(230000);*/
+	usleep(230000);
 
-	error = recvELM2(pd, buf, MAX_MESSEGE_SIZE);
+	error = recvELM(pd, buf, MAX_MESSEGE_SIZE);
 	if(error >= ERROR)	{return error;}
 	if(strncmp(command, "AT", 2) == 0)
 	{
@@ -419,7 +415,7 @@ int command(int pd, char* command,float* value ,char* unit)
 	return SUCCESS;
 }
 // --------------------------------------------------------------------------------------------------------
-//gets a response that was recived from the ELM327 and gives us the value in dec and thr right unit of data
+//translet a response that was origanily recived from the ELM327 to the value in dec and the right unit of data
 // --------------------------------------------------------------------------------------------------------
 int translateELMresponse(char* response , float* value , char* units)
 {
@@ -478,7 +474,6 @@ int hexToDec(char* hex, int size)
 // ----------------------------------------
 // upload data to server
 // ----------------------------------------
-
 int sendToSqlServer(char* values,int size , int fd)
 {
 	char msg[size + 4];
