@@ -178,7 +178,6 @@ int sendELM(int pd, char* msg)
 {
 	int len = strlen(msg), i;
 	char text[len+3];
-	char arr[MAX_MESSEGE_SIZE];
 	for(i=0;i<len;i++)
 	{
 		text[i] = msg[i];
@@ -189,9 +188,6 @@ int sendELM(int pd, char* msg)
 		writeToLog("-write to port error");
 		return WRITE_ERROR;
 	}
-	strcpy(arr, "-write: ");
-	strcat(arr, msg);
-	writeToLog(arr);
 	return SUCCESS;
 }
 // --------------------------------------------------------------------
@@ -200,9 +196,13 @@ int sendELM(int pd, char* msg)
 int recvELM(int pd, char* msg, int len)
 {
 	int n;
-	char arr[MAX_MESSEGE_SIZE];
 	n = read (pd, msg, len);
 	if(n<0)	{writeToLog("-exited read with -1");return READ_ERROR;}
+	if(strncmp(msg , "7F 01 22" ,8) == 0 || strncmp(msg , "NO DATA" ,7) == 0)
+	{
+		writeToLog("engine is off");
+		return ENGINE_IS_OFF;
+	}
 	if(strcmp(msg , "CAN ERROR\n\n>") == 0)
 	{
 		return CAR_NOT_CONNECTED_ERROR;
@@ -213,31 +213,28 @@ int recvELM(int pd, char* msg, int len)
 		n += read (pd, msg + n, len);
 	}
 	msg[n] = '\0';
-	strcpy(arr, "-read: ");
-	strcat(arr, msg);
-	writeToLog(arr);
-	if(strcmp(msg , "SEARCHING...\nUNABLE TO CONNECT\n\n>") == 0){return CAR_NOT_CONNECTED_ERROR;}
+	if(strcmp(msg , "SEARCHING...\nUNABLE TO CONNECT\n\n>") == 0){writeToLog(msg); return ENGINE_IS_OFF;}
 	return SUCCESS;
 }
 int recvELM2(int pd, char* msg, int len)
 {
 	int n = 0, bytes = 0;
-	char arr[MAX_MESSEGE_SIZE] = "";
 
 	while(n==0 || msg[n-1] != '>')
 	{
 		bytes = read (pd, msg + n, len - n);
-		if(bytes<0)	{writeToLog("-exited read with -1");return READ_ERROR;}
-		n+=bytes;
+		if(bytes>=0)n+=bytes;
 	}
 
 	msg[n] = '\0';
-	strcpy(arr, "-read: ");
-	strcat(arr, msg);
-	writeToLog(arr);
 
-	if(strcmp(msg , "CAN ERROR\n\n>") == 0){return CAR_NOT_CONNECTED_ERROR;}
-	if(strcmp(msg , "SEARCHING...\nUNABLE TO CONNECT\n\n>") == 0){return CAR_NOT_CONNECTED_ERROR;}
+	if(strcmp(msg , "CAN ERROR\n\n>") == 0){return ENGINE_IS_OFF;}
+	if(strcmp(msg , "SEARCHING...\nUNABLE TO CONNECT\n\n>") == 0){return ENGINE_IS_OFF;}
+	if(strncmp(msg , "7F 01 22" ,8) == 0 || strncmp(msg , "NO DATA" ,7) == 0)
+	{
+		writeToLog("engine is off");
+		return ENGINE_IS_OFF;
+	}
 	return SUCCESS;
 }
 
@@ -368,6 +365,7 @@ Commands getCommands()
 	commands.engine_load = "0104";
 	commands.air_temperature = "010F";
 	commands.Drivers_throtlePrecent = "0161";
+	commands.Accelerator_pedal_position = "014A";
 	commands.aux_connected = "011E";
 
 
@@ -388,7 +386,7 @@ int command(int pd, char* command,float* value ,char* unit)
 
 	usleep(230000);
 
-	error = recvELM(pd, buf, MAX_MESSEGE_SIZE);
+	error = recvELM2(pd, buf, MAX_MESSEGE_SIZE);
 	if(error >= ERROR)	{return error;}
 	if(strncmp(command, "AT", 2) == 0)
 	{
@@ -399,17 +397,17 @@ int command(int pd, char* command,float* value ,char* unit)
 	error = translateELMresponse(buf ,value ,unit);
 	if(error == -1)
 	{
-		printf("ERROR\n");
+		writeToLog("ERROR from translate\n");
 		return NO_DATA_ERROR;
 	}
 	else if(error == -2)
 	{
-		printf("NO DATA\t");
+		writeToLog("NO DATA from translate\t");
 		return NO_DATA_ERROR;
 	}
 	else
 	{
-		printf("%f%s\t", *value, unit);
+		//printf("%f%s\t", *value, unit);
 	}
 
 	return SUCCESS;
@@ -419,35 +417,56 @@ int command(int pd, char* command,float* value ,char* unit)
 // --------------------------------------------------------------------------------------------------------
 int translateELMresponse(char* response , float* value , char* units)
 {
+	int val;
 	if(strcmp(response, "NO DATA\n\n>")==0 )
 	{
 		return -2;
 	}
 	if(strncmp(response,"41", 2)!=0)	{return -1;} // 41 resambles a correct answer
 	
-	if(strncmp(response+3, "0D", 2)==0) // speed
+	val = hexToDec(response+3,2);
+	
+	switch (val)
 	{
-		*value = hexToDec(response+6, 2);
-		strcpy(units,"Kmph");
+		case 12: //engine speed(0C)
+			*value = hexToDec(response+6, 5)/4.0;
+			strcpy(units,"rpm");
+			break;
+		case 13: // speed (0D)
+			*value = hexToDec(response+6, 2);
+			strcpy(units,"Kmph");
+			break;
+		case 17:  
+		case 4 :
+		case 47: //throtle/ engine_load/ fual
+			*value = (hexToDec(response+6, 2)*100)/255.0;
+			units[0] = '%';
+			units[1] = '\0';
+		case 15 : //air tempartaure
+			*value = hexToDec(response+6, 2)-40;
+			units[0] = 'c';
+			units[1] = '\0';
+			break;
+		case 97: 
+		case 98:  
+			*value = hexToDec(response+6, 2)-125;
+			units[0] = '%';
+			units[1] = '\0';
+			break;
+		case 30:
+			break;
+		case 74 :
+		case 75 :
+		case 76 :
+			*value = (100.0/255.0) * hexToDec(response+6, 2);
+			units[0] = '%';
+			units[1] = '\0';
+			break;
+
+	default:
+		break;
 	}
-	else if(strncmp(response+3, "0C", 2)==0)//engine speed
-	{
-		*value = hexToDec(response+6, 5)/4.0;
-		strcpy(units,"rpm");
-	}
-	else if(strncmp(response+3, "11", 2)==0 ||strncmp(response+3, "04", 2)==0 ||strncmp(response+3, "2F", 2)==0)//throtle or engine_load or fual
-	{
-		*value = (hexToDec(response+6, 2)*100)/255.0;
-		units[0] = '%';
-		units[1] = '\0';
-	}
-	else if(strncmp(response+3, "0F", 2)==0 )//air tempartaure
-	{
-		*value = hexToDec(response+6, 2)-40;
-		units[0] = 'c';
-		units[1] = '\0';
-	}
-	return 0;
+	return SUCCESS;
 }
 
 int hexToDec(char* hex, int size)

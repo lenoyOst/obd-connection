@@ -51,6 +51,7 @@
 #define CLOSE_ERROR 9
 #define CAR_NOT_CONNECTED_ERROR 10
 #define NO_DATA_ERROR 10
+#define ENGINE_IS_OFF 11
 
 typedef struct connections
 {
@@ -75,9 +76,12 @@ typedef struct commands
 	char* set_protocol_auto;
 	char* engine_inputLevel;
 	char* Drivers_throtlePrecent;
+	char* Accelerator_pedal_position;
+
+
 
 	char* monitor;
-
+	
 	char* config_monitor;
 	char* long_msg_ON;
 	char* protocolJ1939;
