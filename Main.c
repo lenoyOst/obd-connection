@@ -63,8 +63,7 @@ int main(int argc, char** argv) // argv : ip port carID customerID password
 
 	Args arg = {&stop, obd_pd , server_pd};
     pthread_create(&tid, NULL, runOBD, (void*)&arg);
-	scanf("%d" ,&stop); 
-	stop = 1;
+	pthread_join(tid , NULL);
 	
 	disconnect(obd_pd); 
 	write(server_pd, "quit" ,4); //disconnect from the server
@@ -77,25 +76,16 @@ void * runOBD(void* args)
     Args* arg = (Args*)args;
 	Commands commands = getCommands();
 	char unit[20];
-	char enginState[2];
 	float value =-1;
 	int numOfVars = 6;
 	char* Svalue = malloc(12);
 	int size = sizeof(Svalue + 1) * numOfVars;
 	char* values = (char*)malloc(size);
-	printf("engine speed\tspeed\t\tthrotle\t\tengine load\tfuel\t\tair temperature\n");
     while(!(*(arg->stop)))
 	{
 		int error;
-		sendELM(arg->Obdpd , commands.engine_inputLevel);
-		recvELM(arg->Obdpd ,enginState ,2);
-		printf("engine state: %s \n" , enginState);
 		if((error = command(arg->Obdpd, commands.rpm,&value ,unit))!=SUCCESS){
-			if(error == NO_DATA_ERROR)
-			{
-				strcat(values ,"NULL ");
-			}
-			else break;
+			break;
 		}
 		else
 		{
@@ -104,13 +94,9 @@ void * runOBD(void* args)
 			strcat(values ," ");
 		}
 
-		if((error = command(arg->Obdpd, commands.speed,&value ,unit))!=SUCCESS)\
+		if((error = command(arg->Obdpd, commands.speed,&value ,unit))!=SUCCESS)
 		{
-			if(error == NO_DATA_ERROR)
-			{
-				strcat(values ,"NULL ");
-			}
-			else break;
+		 break;
 		}
 		else{
 			sprintf(Svalue ,"%f" ,value);
@@ -118,26 +104,8 @@ void * runOBD(void* args)
 			strcat(values ," ");
 		}
 
-		if((error = command(arg->Obdpd, commands.Drivers_throtlePrecent,&value ,unit))!=SUCCESS){
-			if(error == NO_DATA_ERROR)
-			{
-				strcat(values ,"NULL ");
-			}
-			else break;
-		}
-		else
-		{
-			sprintf(Svalue ,"%f" ,value);
-			strcat(values ,Svalue);
-			strcat(values ," ");
-		}
-
-		if((error = command(arg->Obdpd, commands.aux_connected,&value ,unit))!=SUCCESS){	
-			if(error == NO_DATA_ERROR)
-			{
-				strcat(values ,"NULL ");
-			}
-			else break;
+		if((error = command(arg->Obdpd, commands.Accelerator_pedal_position,&value ,unit))!=SUCCESS){
+			 break;
 		}
 		else
 		{
@@ -147,11 +115,8 @@ void * runOBD(void* args)
 		}
 		strcat(values ,"31.977261 ");//lat
 		strcat(values ,"34.770022");//long
-		puts(values);
 		if(sendToSqlServer(values, strlen(values) ,arg->Sqlpd) >= ERROR) {break;}
 		values[0] = '\0';
-		printf("\n");
 	}
-	printf("\n");
 	return NULL;
 }
