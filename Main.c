@@ -5,7 +5,7 @@
 
 void * runOBD(void* argv);
 
-
+void * runOBD1(void* args);
 
 typedef struct args
 {
@@ -64,13 +64,20 @@ int main(int argc, char** argv) // argv : ip port carID customerID password
 	Args arg = {&stop, obd_pd , server_pd};
     pthread_create(&tid, NULL, runOBD, (void*)&arg);
 	pthread_join(tid , NULL);
-	
+	//scanf("%d" ,arg.stop);
+	//*arg.stop = 1;
 	disconnect(obd_pd); 
 	write(server_pd, "quit" ,4); //disconnect from the server
 	closeLog();
 	return 0;
 }
-
+void * runOBD1(void* args)
+{
+	 Args* arg = (Args*)args;
+	char* values = "NULL NULL NULL NULL NULL";
+	sendToSqlServer(values, strlen(values) ,arg->Sqlpd);
+	return 0;
+}
 void * runOBD(void* args)
 {
     Args* arg = (Args*)args;

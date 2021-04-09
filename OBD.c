@@ -382,10 +382,6 @@ int command(int pd, char* command,float* value ,char* unit)
 	error = sendELM(pd, command);
 	if(error >= ERROR)	{return error;}
 
-	//if(strcmp(command , getCommands().reset) == 0)	{sleep(1);}
-
-	//usleep(230000);
-
 	error = recvELM2(pd, buf, MAX_MESSEGE_SIZE);
 	if(error >= ERROR)	{return error;}
 	if(strncmp(command, "AT", 2) == 0)
