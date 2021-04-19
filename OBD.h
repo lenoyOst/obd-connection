@@ -15,6 +15,7 @@
 #include <netinet/in.h>
 #include <sys/socket.h>
 #include "log.h"
+#include "help.h"
 
 
 #define MAX_POTENTIALS_PORTS 10
@@ -52,6 +53,7 @@
 #define CAR_NOT_CONNECTED_ERROR 10
 #define NO_DATA_ERROR 10
 #define ENGINE_IS_OFF 11
+#define NOT_GPS 12
 
 typedef struct connections
 {
@@ -117,3 +119,14 @@ int translateELMresponse(char* response , float* value , char* units);
 int hexToDec(char* hex, int size);
 int sendToSqlServer(char* values , int fd,int size);
 int connectToSqlServer();
+void* gps(void* args);
+int connectToGPS(char* portname, int* pd);
+void readLine(int pd, char* msg, int max_len);
+typedef struct argsGPS
+{
+	int *stop; // the thread will run until stop changes to 1 
+	char* lat;
+	char* latD;
+	char* lon;
+	char* lonD;
+} ArgsGPS;

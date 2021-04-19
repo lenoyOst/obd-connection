@@ -15,7 +15,7 @@ int stringToPositiveFloat(char* string, float *number);
 
 void freeStrings(Strings strings);
 
-Strings split(char* str);
+Strings split(char* str , char regex);
 
 char* appendStrings(int count, ...);
 

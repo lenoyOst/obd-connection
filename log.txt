@@ -2,6 +2,8 @@
 -/dev/ttyS0 is not obd
 -/dev/ttyS1 is not obd
 -/dev/ttyS2 is not obd
--obd found: /dev/ttyS3
-engine is off
+-/dev/ttyS3 is not obd
+-obd found: /dev/ttyS4
+-scanning for serial ports
+ERROR from translate\n
 -port closed

@@ -1,6 +1,5 @@
 #include "OBD.h"
 #include "client.h"
-#include "help.h"
 #include <pthread.h>
 
 void * runOBD(void* argv);
@@ -12,41 +11,51 @@ typedef struct args
 	int *stop; // the thread will run until stop changes to 1 
 	int Obdpd;
 	int Sqlpd;
+	ArgsGPS argsGPS;
 } Args;
 
 int main(int argc, char** argv) // argv : ip port carID customerID password
 {
+	char *lat = (char*)malloc(20);
+	char *lon = (char*)malloc(20);
+	char *latD = (char*)malloc(2);
+	char *lonD = (char*)malloc(2);
 	int server_pd,obd_pd;
 	char buf[MAX_MESSEGE_SIZE*sizeof(char)] = "";
 	int port = 0;
 	char* msg;
 	int stop = 0;
-	pthread_t tid;
+	pthread_t tid[2];
 
+	strcpy(lat,"NULL");
+	strcpy(latD,"NULL");
+	strcpy(lon,"NULL");
+	strcpy(lonD,"NULL");
 
 	if(argc!= 6 || !isIp(argv[1]) || !onlyNumbers(argv[2]))
 	{
-		printf("wrong amount of args");
+		puts("wrong amount of args");
 		return 0;
 	}
 	if(stringToInt(argv[2], &port) < 0)
 	{
-		printf("port must be a int");
+		puts("port must be a int");
 		return 0;
 	}
-	//
 	creatLog();
-	 
 	if((obd_pd = OBD()) < 0){return 0;}
+	
 	if((server_pd = openClient(argv[1], port)) < 0)
 	{
 		writeToLog("could not connect to server");
 		return 0;
 	}
 	
-	//identif to the dataBase server and connect to the correct user 
+	//identify to the dataBase server and connect to the correct user 
 	msg = appendStrings(6, "connect ", argv[3], " ", argv[4] , " ",argv[5]); // syntax : connect carID UserID password 
+	
 	write(server_pd, msg ,strlen(msg));
+	
 	if(read(server_pd ,msg , 3) == -1)
 	{
 		writeToLog("error when trying to read server's respons after sending connect request");
@@ -61,11 +70,15 @@ int main(int argc, char** argv) // argv : ip port carID customerID password
 	Commands commands = getCommands();
 	command(obd_pd, commands.echo_off, NULL ,buf); //echo_off
 
-	Args arg = {&stop, obd_pd , server_pd};
-    pthread_create(&tid, NULL, runOBD, (void*)&arg);
-	pthread_join(tid , NULL);
+	ArgsGPS argGPS = {&stop,lat,latD , lon , lonD};
+	Args arg = {&stop, obd_pd , server_pd ,argGPS};
+	
+    pthread_create(&tid[0], NULL, runOBD, (void*)&arg);
+	pthread_create(&tid[1] , NULL ,gps , (void*)&argGPS);
+	pthread_join(tid[0] , NULL);
+	pthread_join(tid[1], NULL);
 	//scanf("%d" ,arg.stop);
-	//*arg.stop = 1;
+	*arg.stop = 1;
 	disconnect(obd_pd); 
 	write(server_pd, "quit" ,4); //disconnect from the server
 	closeLog();
@@ -74,8 +87,23 @@ int main(int argc, char** argv) // argv : ip port carID customerID password
 void * runOBD1(void* args)
 {
 	 Args* arg = (Args*)args;
-	char* values = "NULL NULL NULL NULL NULL";
+	char values[MAX_MESSEGE_SIZE];
+	while(!(*(arg->stop)))
+	{
+ strcat(values ,"NULL NULL NULL ");
+		
+		strcat(values ,arg->argsGPS.lat);
+		strcat(values ," ");
+		strcat(values ,arg->argsGPS.latD);
+		strcat(values ," ");
+		strcat(values ,arg->argsGPS.lon);
+		strcat(values ," ");
+		strcat(values ,arg->argsGPS.lonD);
 	sendToSqlServer(values, strlen(values) ,arg->Sqlpd);
+	values[0] = '\0';
+	}
+	
+	
 	return 0;
 }
 void * runOBD(void* args)
@@ -120,10 +148,16 @@ void * runOBD(void* args)
 			strcat(values ,Svalue);
 			strcat(values ," ");
 		}
-		strcat(values ,"31.977261 ");//lat
-		strcat(values ,"34.770022");//long
+		strcat(values ,arg->argsGPS.lat);
+		strcat(values ," ");
+		strcat(values ,arg->argsGPS.latD);
+		strcat(values ," ");
+		strcat(values ,arg->argsGPS.lon);
+		strcat(values ," ");
+		strcat(values ,arg->argsGPS.lonD);
 		if(sendToSqlServer(values, strlen(values) ,arg->Sqlpd) >= ERROR) {break;}
 		values[0] = '\0';
 	}
+	*(arg->stop) = 1;
 	return NULL;
 }

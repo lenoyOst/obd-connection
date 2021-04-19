@@ -319,7 +319,7 @@ int OBD()
 	
 	for(i=0;i<connections.size;i++)
 	{
-		error = connectToELM327(connections.list[i], &pd);
+		error = connectToELM327("/dev/ttyS3", &pd);
 		if(error == SUCCESS)
 			break;
 	}
@@ -330,6 +330,7 @@ int OBD()
 		return -1;
 	}
 	freeConnections(&connections);
+	
 	return pd;
 }
 //-------------------------------------
@@ -491,15 +492,100 @@ int hexToDec(char* hex, int size)
 // ----------------------------------------
 int sendToSqlServer(char* values,int size , int fd)
 {
+	int n;
 	char msg[size + 4];
 	msg[0] = '\0';
 	strcat(msg , "set ");
 	strcat(msg , values);
 	write(fd , msg ,size + 4);
-	read(fd , msg ,3);
+	n = read(fd , msg ,3);
+	msg[n] = '\0';
+	writeToLog(msg);
 	if(strncmp(msg , "bye",3) == 0)
 	{
 		return ERROR;
 	}
 	return SUCCESS;
+}
+
+//---------------------------
+//gps
+//---------------------------
+void* gps(void* args)
+{
+	ArgsGPS *argsGPS = (ArgsGPS*)args;
+	Connections connections;
+    scanSerial(&connections);
+	int pd;
+	char line[MAX_MESSEGE_SIZE];
+	Strings data;
+    for(int i = 0;i<connections.size;i++)
+    {
+        if(connectToGPS("/dev/ttyS5", &pd) == SUCCESS)
+        {
+			
+			while (!*(argsGPS->stop))
+			{
+				readLine(pd, line, MAX_MESSEGE_SIZE);
+				data = split(line, ',');
+				if(data.error == 1) return NULL;
+				if(strcmp(data.strings[0], "$GPRMC") == 0)
+				{
+					if(strcmp(data.strings[2], "A") == 0)
+					{
+						
+						strcpy(argsGPS->lat ,data.strings[3]);
+						strcpy(argsGPS->latD ,data.strings[4]);
+						strcpy(argsGPS->lon ,data.strings[5]);
+						strcpy(argsGPS->lonD ,data.strings[6]);
+					}
+					else {
+						strcpy(argsGPS->lat ,"NULL");
+						strcpy(argsGPS->latD ,"NULL");
+						strcpy(argsGPS->lon ,"NULL");
+						strcpy(argsGPS->lonD ,"NULL");
+					}
+				}
+			}
+			freeStrings(data);
+			break;
+		}
+	}
+	return NULL;
+}
+int connectToGPS(char* portname, int* pd)
+{
+    char sys[100] = "sudo chmod 777 ";
+    int i;
+    for(i=0;i<strlen(portname);i++)
+    {
+        sys[i+15] = portname[i];
+    }
+    system(sys);
+    *pd = open(portname, O_RDWR | O_NOCTTY | O_NDELAY);
+	if (*pd < 0)
+    {
+        return NOT_GPS;
+    }
+	
+    set_interface_attribs (*pd, B9600, 0);
+    set_blocking (*pd, 0);
+    return SUCCESS;
+}
+void readLine(int pd, char* msg, int max_len)
+{
+    char c = '\0';
+    int n;
+    int total = 0;
+    while(c!='\n' && total <= max_len)
+    {
+        n=-1;
+        while(n!=1)
+        {
+            n = read(pd, msg+total, 1);
+        }
+        total+=n;
+        c = msg[total-1];
+    }
+    msg[total-1] = '\0';
 }

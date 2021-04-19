@@ -54,7 +54,7 @@ int stringToPositiveFloat(char* string, float *number)
 // ----------------------
 // split string by spaces
 // ----------------------
-Strings split(char* str)
+Strings split(char* str , char regex)
 {
     Strings stringList;
 	int i = 0;
@@ -65,7 +65,7 @@ Strings split(char* str)
 
     while(str[i] != '\0')
     {
-        if(str[i] == ' ')
+        if(str[i] == regex)
            stringList.size++;
         i++;
     }
@@ -79,7 +79,7 @@ Strings split(char* str)
     }
 	while(str[end] != '\0')
 	{
-        if(str[end] == ' ')
+        if(str[end] == regex)
         {
             stringList.strings[count] = (char*)malloc(sizeof(char) * (end - start + 1));
             if(stringList.strings[count] == NULL)
